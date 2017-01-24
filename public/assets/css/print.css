@@ -1,0 +1,164 @@
+html{
+     
+}
+body{
+  margin-left: 2%;
+  
+}
+fieldset { border:1px solid green }
+
+legend {
+  padding: 0.2em 0.5em;
+  border:1px solid green;
+  color:green;
+  font-size:90%;
+   
+  }
+ 
+element {
+}
+ 
+.user_content .full_width_in_card {
+    margin: 16px 0px 32px;
+}
+ 
+  
+.form-search input, .form-inline input, .form-horizontal input, .form-search textarea, .form-inline textarea, .form-horizontal textarea, .form-search select, .form-inline select, .form-horizontal select, .form-search .help-inline, .form-inline .help-inline, .form-horizontal .help-inline, .form-search .uneditable-input, .form-inline .uneditable-input, .form-horizontal .uneditable-input, .form-search .input-prepend, .form-inline .input-prepend, .form-horizontal .input-prepend, .form-search .input-append, .form-inline .input-append, .form-horizontal .input-append {
+border: medium none;
+display: inline-block;
+margin-bottom: 0;
+vertical-align: middle;
+font-size: 16px;
+}   
+ .box .box-title {
+border-bottom: 1px solid #ddd;
+padding: 7px 0 7px 10px;
+margin-top: 20px;
+}
+      .box .box-title h3 {
+color: #444444;
+ 
+font-size: 18px;
+font-weight: 400;
+line-height: 24px;
+margin: 3px 0;
+}
+
+    label, input, button, select, textarea {
+    font-size: 15px;
+}
+    .form-horizontal .control-label{
+      text-align: left;
+      width: 170px;
+      text-transform: uppercase;
+    }
+    input[type="text"],input[type="select"],input[type="textarea"]
+    {
+      margin-left: -7%;
+      border: none;
+    }
+    .form-search input, .form-inline input, .form-horizontal input, .form-search textarea, .form-inline textarea, .form-horizontal textarea, .form-search select, .form-inline select, .form-horizontal select, .form-search .help-inline, .form-inline .help-inline, .form-horizontal .help-inline, .form-search .uneditable-input, .form-inline .uneditable-input, .form-horizontal .uneditable-input, .form-search .input-prepend, .form-inline .input-prepend, .form-horizontal .input-prepend, .form-search .input-append, .form-inline .input-append, .form-horizontal .input-append {
+    border: medium none;
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+    height: 1%;
+}
+@media print {
+	#page1	{page-break-before:always;}
+	#page2	{page-break-before:always;}
+	#page3	{page-break-before:always;}
+        #page4	{page-break-before:always;}
+        .school	{page-break-before:always;}
+	.page9	{page-break-inside:avoid; page-break-after:auto}
+	 a,
+  a:visited {
+    text-decoration: underline;
+  }
+  body{font-size: 14px}
+  size:A4;
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+   
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group; 
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 2cm .5cm;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+
+  
+  select {
+    background: #fff !important;
+  }
+
+  
+  .navbar {
+    display: none;
+  }
+  .table {
+    td,
+    th {
+     
+    }
+  }
+  .btn,
+  .dropup > .btn {
+    > .caret {
+      border-top-color: #000 !important;
+    }
+  }
+  .label {
+    border: 1px solid #000;
+  }
+
+  .table {
+    border-collapse: collapse !important;
+  }
+  .table-bordered {
+    th,
+    td {
+      border: 1px solid #ddd !important;
+    }
+  }
+}
+ 
