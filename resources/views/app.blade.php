@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Takoradi Technical University | Admissions Forms Sales</title>
+        <title>Takoradi Technical University | Admissions </title>
         
         <link href="{{ asset('/public/css/app.css')}}" rel="stylesheet">
         <link href="{{ asset('/public/css/footer.css')}}" rel="stylesheet">

@@ -17,17 +17,17 @@
 
                                 <p><strong>I</strong>. In completing the online form, applicants will be required to upload their passport size photograph (not more than 500KB) with a white background.</p>
                                 <p><strong>II. </strong>Applicants are advised to check thoroughly all details entered before they finally submit their online applications. A form, once submitted, can be viewed, but cannot be edited.</p>
-                                <p><strong>III.</strong> Applicants should print out application summary; attach result slips,certificates  and all other relevant documents.</p>
+                                <p><strong>III.</strong> Applicants should print out application form; attach result slips, certificates  and all other relevant documents.</p>
                                 <p><strong>VI. </strong>The application documents as specified (III) above should sent by post to  
                                     @else
 
                                 <p><center><strong>FORIEGN APPLICANTS</strong></center></p>
                                 <hr>
                                 <p>All Foreign applicants for the <?php echo (date("Y") ) . "/" . (date("Y") + 1); ?> Academic year admission are required to use Takoradi Technical University online admission portal. The procedure for the online application process is as follows:</p>
-
+                                <!-- edited by kojo and olivia -->
                                 <p><strong>I</strong>. In completing the online form, applicants will be required to upload their passport size photograph (not more than 500KB) with a white background.</p>
                                 <p><strong>II. </strong>Applicants are advised to check thoroughly all details entered before they finally submit their online applications. A form, once submitted, can be viewed, but cannot be edited.</p>
-                                <p><strong>III.</strong> Applicants should print out application summary; attach result slips,certificates and all other relevant documents.</p>
+                                <p><strong>III.</strong> Applicants should print out application form; attach result slips, certificates and all other relevant documents.</p>
                                 <p><strong>VI. </strong>The application documents as specified (III) above should sent by post to  
                                     @endif
 

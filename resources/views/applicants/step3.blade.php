@@ -56,18 +56,18 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">First Choice</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                 {!!   Form::select('firstChoice',$programme ,array('style'=>'width:120px','placeholder'=>'select first choice',"required"=>"required","v-model"=>"firstChoice","v-form-ctrl"=>"","v-select"=>"firstChoice")   )  !!}
+                                 {!!   Form::select('firstChoice',$programme ,array('style'=>'width:120px',old('firstChoice',@$data->FIRST_CHOICE),'placeholder'=>'select first choice',"required"=>"required","v-model"=>"firstChoice","v-form-ctrl"=>"","v-select"=>"firstChoice")   )  !!}
                                  <p class="text-danger text-danger"  v-if="biodata.firstChoice.$error.required" >First Choice is required</p>                                 
                             </div>
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label"> </label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
                                 @if(@Auth::user()->FORM_TYPE=="MATURE")
-                                    {!!   Form::select('entry',array("MATURE"=>"MATURE"),old(@$data->ENTRY_TYPE,''),array('placeholder'=>'Select entry type',"required"=>"required", "v-select"=>"entry","v-model"=>"entry","v-form-ctrl"=>"","id"=>"entry"))  !!}
+                                    {!!   Form::select('entry',array("MATURE"=>"MATURE"),old('entry',@$data->ENTRY_TYPE),array('placeholder'=>'Select entry type',"required"=>"required", "v-select"=>"entry","v-model"=>"entry","v-form-ctrl"=>"","id"=>"entry"))  !!}
 
                                 @elseif(@Auth::user()->FORM_TYPE=="ACCESS")
-                                {!!   Form::select('entry',array("Access"=>"ACCESS"),old(@$data->ENTRY_TYPE,''),array('placeholder'=>'Select entry type',"required"=>"required", "v-select"=>"entry","v-model"=>"entry","v-form-ctrl"=>"","id"=>"entry"))  !!}
+                                {!!   Form::select('entry',array("Access"=>"ACCESS"),old('entry',@$data->ENTRY_TYPE),array('placeholder'=>'Select entry type',"required"=>"required", "v-select"=>"entry","v-model"=>"entry","v-form-ctrl"=>"","id"=>"entry"))  !!}
                              @else
-                             {!!   Form::select('entry',array("DIRECT"=>"DIRECT"),old(@$data->ENTRY_TYPE,''),array('placeholder'=>'Select entry type',"required"=>"required", "v-select"=>"entry","v-model"=>"entry","v-form-ctrl"=>"","id"=>"entry"))  !!}
+                             {!!   Form::select('entry',array("DIRECT"=>"DIRECT"),old('entry',@$data->ENTRY_TYPE),array('placeholder'=>'Select entry type',"required"=>"required", "v-select"=>"entry","v-model"=>"entry","v-form-ctrl"=>"","id"=>"entry"))  !!}
                              @endif
                                 <p class="text-danger text-danger"  v-if="biodata.entry.$error.required" >Entry Type is required</p>                                 
 
@@ -76,30 +76,32 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Second Choice</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('secondChoice',$programme ,array('placeholder'=>'select second choice',"required"=>"required", "v-model"=>"secondChoice","v-form-ctrl"=>"","v-select"=>"secondChoice")   )  !!}
+                                {!!   Form::select('secondChoice',$programme ,old('secondChoice',@$data->SECOND_CHOICE),array('placeholder'=>'select second choice',"required"=>"required", "v-model"=>"secondChoice","v-form-ctrl"=>"","v-select"=>"secondChoice")   )  !!}
                                 <p class="text-danger text-danger"  v-if="biodata.secondChoice.$error.required" >Second Choice is required</p>                                 
 
                             
                             </div>
+                           @if(@Auth::user()->FORM_TYPE=="BTECH")
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label"> </label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
                                 <input type="text" id="study_program" name="study_program" class="form-control" required=""placeholder="Programme Studied at School"   value="{{@$data->PROGRAMME_STUDY}}"    v-model="study_program"v-form-ctrl  >                             
                                 <p class="text-danger text-danger"  v-if="biodata.study_program.$error.required" >Programme studied is required</p>                                 
 
                             </div>
+                            @endif
                         </div>
                         <div class="form-group">
 
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Third Choice</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('thirdChoice',$programme ,array('placeholder'=>'select third choice',"required"=>"required", "v-model"=>"secondChoice","v-form-ctrl"=>"","v-select"=>"secondChoice")   )  !!}
+                                {!!   Form::select('thirdChoice',$programme ,old('thirdChoice',@$data->THIRD_CHOICE),array('placeholder'=>'select third choice',"required"=>"required", "v-model"=>"thirdChoice","v-form-ctrl"=>"","v-select"=>"thirdChoice")   )  !!}
                                 <p class="text-danger text-danger"  v-if="biodata.secondChoice.$error.required" >Third  Choice is required</p>                                 
 
                             </div>
                              @if(@Auth::user()->FORM_TYPE=="BTECH")
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label"> </label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                              {!!   Form::select('class',array("FIRST CLASS"=>"FIRST CLASS","SECOND CLASS UPPER"=>"SECOND CLASS UPPER","SECOND CLASS LOWER"=>"SECOND CLASS LOWER","THIRD CLASS"=>"THIRD CLASS","PASS"=>"PASS"),old('class',''),array('placeholder'=>'Select Class obtained',"tabindex"=>"-1", "v-model"=>"class","v-form-ctrl"=>"","v-select"=>"class","required"=>""))  !!}
+                              {!!   Form::select('class',array("FIRST CLASS"=>"FIRST CLASS","SECOND CLASS UPPER"=>"SECOND CLASS UPPER","SECOND CLASS LOWER"=>"SECOND CLASS LOWER","THIRD CLASS"=>"THIRD CLASS","PASS"=>"PASS"),old('class',@$data->CLASS),array('placeholder'=>'Select Class obtained',"tabindex"=>"-1", "v-model"=>"class","v-form-ctrl"=>"","v-select"=>"class","required"=>""))  !!}
                              <p class="text-danger text-danger"  v-if="biodata.class.$error.required" >Class obtained is required</p>                                 
 
                             </div>
@@ -117,7 +119,7 @@
                            
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Hall of affiliation</label>
                            <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                 {!!   Form::select('hall',$hall,array('placeholder'=>'Select hall of choice',"required"=>"required",  "id"=>"hall","v-model"=>"hall","v-form-ctrl"=>"","v-select"=>"hall")   )  !!}
+                                 {!!   Form::select('hall',$hall,old('hall',$data->PREFERED_HALL),array('placeholder'=>'Select hall of choice',"required"=>"required",  "id"=>"hall","v-model"=>"hall","v-form-ctrl"=>"","v-select"=>"hall")   )  !!}
                                                              
                                 <p class="text-danger text-danger"  v-if="biodata.hall.$error.required" >Hall of affiliation is required</p>                                 
 
@@ -129,6 +131,8 @@
                          <div class="form-group">
                             <div class="col-sm-offset-2 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                 <button type="submit"  v-show="biodata.$valid" class="btn btn-primary">Save</button>
+                                <button type="button" onclick="return alert('Please fill all required fields')"  v-show="biodata.$invalid" class="btn btn-danger">Save</button>
+                           
                                 <button type="reset" class="btn btn-default">Reset</button>
                             </div>
                         </div>
@@ -187,6 +191,11 @@
         ready: function () {
         },
         data: {
+              firstChoice:"<?php echo @$data->FIRST_CHOICE ?>",
+              secondChoice:"<?php echo @$data->SECOND_CHOICE ?>",
+              thirdChoice:"<?php echo @$data->THIRD_CHOICE ?>",
+             entry:"<?php echo @@$data->ENTRY_TYPE ?>",
+              hall:"<?php echo $data->PREFERED_HALL ?>",
             options: []
 
         },

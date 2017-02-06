@@ -117,7 +117,7 @@ class FormController extends Controller {
                 $sitting = $request->input('sitting');
 
               if(@\Auth::user()->COUNTRY=="GHANAIAN"){
-                if(@\Auth::user()->FORM_TYPE=="WASSSCE" || @\Auth::user()->FORM_TYPE=="SSSCE"){
+                if($sys->getEntryName()=="WASSSCE" || @$sys->getEntryName()=="SSSCE"){
                 for ($i = 0; $i < $total; $i++) {
                     $result = new Models\ExamResultsModel();
                     $result->APPLICATION_NUMBER = $applicantForm;
@@ -254,9 +254,9 @@ class FormController extends Controller {
 //            $firstChoice = strtoupper($request->input('firstChoice'));
 //            $secondChoice = strtoupper($request->input('secondChoice'));
 //            $thirdChoice = strtoupper($request->input('thirdChoice'));
-            $gender = strtoupper($request->input('gender'));
+            $gender =  $request->input('gender') ;
 
-            // $hall = strtoupper($request->input('hall'));
+            $hall = $request->input('hall');
             $dob = strtoupper($request->input('dob'));
             $gname = strtoupper($request->input('gname'));
             $gphone = strtoupper($request->input('gphone'));
@@ -264,21 +264,21 @@ class FormController extends Controller {
             $gaddress = strtoupper($request->input('gaddress'));
             $email = strtoupper($request->input('email'));
             $phone = strtoupper($request->input('phone'));
-            $marital_status = strtoupper($request->input('marital_status'));
-            $region = strtoupper($request->input('region'));
+            $marital_status =  $request->input('marital_status') ;
+            $region =  $request->input('region') ;
             if (@\Auth::user()->COUNTRY == "GHANAIAN") {
-                $country = "GHANA";
+                $country = "Ghana";
             } else {
-                $country = strtoupper($request->input('nationality'));
+                $country =  $request->input('nationality');
             }
-            $religion = strtoupper($request->input('religion'));
+            $religion =  $request->input('religion') ;
             $residentAddress = strtoupper($request->input('contact'));
             $address = strtoupper($request->input('address'));
             $hometown = strtoupper($request->input('hometown'));
             $grelationship = strtoupper($request->input('grelationship'));
 
             $disability = strtoupper($request->input('disability'));
-            $disability_question = strtoupper($request->input('disabled'));
+            $disability_question =  $request->input('disable') ;
             $title = strtoupper($request->input('title'));
 
             $qualification = strtoupper($request->input('qualification'));
@@ -312,7 +312,7 @@ class FormController extends Controller {
                 $query->ADDRESS = $address;
                 $query->RESIDENTIAL_ADDRESS = $residentAddress;
                 $query->EMAIL = $email;
-
+                 $query->PREFERED_HALL = $hall;
                 $query->PHONE = $phone;
                 $query->NATIONALITY = $country;
                 $query->REGION = $region;
@@ -364,6 +364,7 @@ class FormController extends Controller {
                     "RESIDENTIAL_ADDRESS" => $residentAddress,
                     "EMAIL" => $email,
                     "PHONE" => $phone,
+                    "PREFERED_HALL" => $hall,
                     "NATIONALITY" => $country,
                     "REGION" => $region,
                     "RELIGION" => $religion,
@@ -412,7 +413,7 @@ class FormController extends Controller {
             return view('applicants.step3')->with("data", $query)->with('programme', $programme)
                             ->with('hall', $hall);
         } else {
-//        \DB::beginTransaction();
+//         \DB::beginTransaction();
 //        try {
 
 
@@ -425,31 +426,49 @@ class FormController extends Controller {
                 
                 'school' => 'required',
                 'entry' => 'required',
-                'study_program' => 'required',
+                 
             ]);
             $applicantForm = @\Auth::user()->FORM_NO;
 
             $firstChoice = strtoupper($request->input('firstChoice'));
             $secondChoice = strtoupper($request->input('secondChoice'));
             $thirdChoice = strtoupper($request->input('thirdChoice'));
-            $hall = strtoupper($request->input('hall'));
+            $hall =  $request->input('hall') ;
             $programStudy = strtoupper($request->input('study_program'));
             $entry = strtoupper($request->input('entry'));
              \Session::put('entry', $entry);
             $class = strtoupper($request->input('class'));
             $school = strtoupper($request->input('school'));
-            $query = Models\ApplicantModel::where("APPLICATION_NUMBER", $applicantForm)
+           
+                 if(@\Auth::user()->FORM_TYPE=="BTECH"){
+                     $query = Models\ApplicantModel::where("APPLICATION_NUMBER", $applicantForm)
                     ->update(array(
-                "PREFERED_HALL" => $hall,
+                 
                 "FIRST_CHOICE" => $firstChoice,
                 "SECOND_CHOICE" => $secondChoice,
                 "THIRD_CHOICE" => $thirdChoice,
                 "CLASS" => $class,
+                       
                 "PROGRAMME_STUDY" => $programStudy,
+                "PREFERED_HALL" =>$hall,
                 "SCHOOL" => $school,
                 "ENTRY_TYPE" => $entry,
                 "UPDATED" => "1"
             ));
+                 }
+                 else{
+                      $query = Models\ApplicantModel::where("APPLICATION_NUMBER", $applicantForm)
+                    ->update(array(
+                 
+                "FIRST_CHOICE" => $firstChoice,
+                "SECOND_CHOICE" => $secondChoice,
+                "THIRD_CHOICE" => $thirdChoice,
+                      "PREFERED_HALL" =>$hall,
+                "SCHOOL" => $school,
+                "ENTRY_TYPE" => $entry,
+                "UPDATED" => "1"
+            ));
+                 }
             \DB::commit();
             if ($query) {
 
@@ -465,8 +484,8 @@ class FormController extends Controller {
             }
 
 
-//        } catch (\Exception $e) {
-//            \DB::rollback();
+//       } catch (\Exception $e) {
+//          \DB::rollback();
 //        }
         }
     }}
@@ -634,8 +653,9 @@ class FormController extends Controller {
                     "<p>Best regards</p>";
 
                     if (@mail($email, "Takoradi Technical University Admissions", $email_message, $headers)) {
-                        return redirect("/logout");
+                          return redirect("/form/preview");
                     }
+                       return redirect("/form/preview");
                 
             } else {
                 $headers = 'MIME-Version: 1.0' . "\r\n";
@@ -662,9 +682,12 @@ class FormController extends Controller {
                 "<p>Best regards</p>";
 
                 if (@mail($email, "Takoradi Technical University Admissions", $email_message, $headers)) {
-                     return redirect("/logout");
+                     return redirect("/form/preview");
       
                 }
+                 return redirect("/form/preview");
+      
+                
             }
         }
 
@@ -699,6 +722,23 @@ class FormController extends Controller {
         } catch (\Exception $e) {
             \DB::rollback();
         }
+    }
+    
+    public function generateAccounts() {
+        ini_set('max_execution_time', 3000); //300 seconds = 5 minutes
+         $form=  Models\ExcelForm::where('id','!=','0')->get();
+         foreach($form as $users=>$row){
+             
+             
+             $FormTable=new  Models\FormModel();
+              $FormTable->serial=$row->serial;
+            $FormTable->PIN=$row->PIN;
+           $FormTable->password=bcrypt($row->PIN);
+           $FormTable->SOLD_BY=$row->SOLD_BY;
+           $FormTable->FORM_TYPE=$row->FORM_TYPE;
+              $FormTable->save();
+         } 
+         
     }
 
 }

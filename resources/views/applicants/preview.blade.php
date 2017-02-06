@@ -103,14 +103,14 @@
             </div>
             @endif
         </div> 
-            <a onclick="javascript:printDiv('print')" class="btn btn-primary btn-sm">Click to print form</a>
-        @if(@\Auth::user()->FINALIZED!=1)
+           @if(@\Auth::user()->FINALIZED!=1)
         <a href="{{url('/upload/photo')}}" class="btn btn-warning btn-sm">Edit Information</a>
        
-        <a href="{{url('/form/completed')}}" onclick="return confirm('Are you sure every information provided on this form is correct??. After submiting you cannot edit this form again')" id="final" class="btn btn-success btn-sm">Submit Form</a>
+        <a href="{{url('/form/completed')}}" onclick="return confirm('Are you sure every information provided on this form is correct??. After submiting you cannot edit this form again')" id="final" class="btn btn-success btn-sm">Print Submit Form</a>
          @else
-          <a href="{{url('/logout')}}"   class="btn btn-success">Click to logout</a>
-         
+          <a href="{{url('/logout')}}"   class="btn btn-danger">Click to logout</a>
+             <a onclick="javascript:printDiv('print')" class="btn btn-success">Click to print form</a>
+     
           @endif
            <div class="panel panel-default">
                 <div class="panel-heading">FORM PREVIEW - CHECK EVERY INFORMATION ON THIS FORM @if(@\Auth::user()->BIODATA_DONE=="1")
@@ -139,8 +139,8 @@
                                 </td>
                                  
                                 <td align='right' style="width:600px">
-                                        <p style="font-size:14px">ACADEMIC AFFAIRS UNIT<br/>
-                                            ADMISSIONS OFFICE<br/>
+                                        <p style="font-size:14px">OFFICE OF THE REGISTRAR<br/>
+                                            ADMISSIONS UNIT<br/>
                                             TEL:+233-031-2022917/8<br/>
                                             EMAIL:info@tpoly.edu.gh<br/>
                                             P.O.BOX 256,TAKORADI,GHANA
@@ -194,11 +194,7 @@
                                                 <td class="capitalize"><?php echo "+233" . \substr($student->PHONE, -9); ?></td>
                                             </tr>
 
-                                            <tr>
-                                                <td class="uppercase" align="right"><span>PROGRAMME STUDIED:</span></td>
-                                                <td class="capitalize"><?php echo strtoupper($student->PROGRAMME_STUDY) ?></td>
-
-                                            </tr>
+                                           
 
                                             <tr>
                                                 <td class="uppercase" align="right"><span>PREVIOUS SCHOOL:</span></td>
@@ -236,12 +232,7 @@
                                 </tr>
                             </table>
                            </fieldset>
-                         
-                    </div>
-                      
-                      <div id='page2'>
-                          
-                               <fieldset><legend  style="background-color:#1A337E;color:white;">OTHER INFORMATION</legend>
+                              <fieldset><legend  style="background-color:#1A337E;color:white;">OTHER INFORMATION</legend>
                              <table  class="folder table">
                                 <tr>
                                     <td>
@@ -252,17 +243,17 @@
 
                                             </tr>
                                             <tr>
-                                               <td class="uppercase" style=""><strong>POSTAL ADDRESS</strong></td>
+                                               <td class="uppercase" style=""><strong>POSTAL ADDRESS:</strong></td>
                                                 <td class="capitalize">{!! strtoupper($student->ADDRESS) !!}</td>
 
                                             </tr>
                                             <tr>
-                                                <td class="uppercase"><strong>HALL</strong></td>
+                                                <td class="uppercase"><strong>HALL:</strong></td>
                                                 <td class="capitalize">{!!strtoupper( $student->PREFERED_HALL) !!}</td>
                                                 
                                             </tr>
                                             <tr>
-                                                 <td class="uppercase"><strong>MARITAL STATUS</strong></td>
+                                                 <td class="uppercase"><strong>MARITAL STATUS:</strong></td>
                                                 <td class="capitalize">{!! strtoupper($student->MARITAL_STATUS) !!}</td>
                                                
                                             </tr>
@@ -277,19 +268,19 @@
 
                                             </tr>
                                             <tr>
-                                                 <td class="uppercase"  ><strong>HOMETOWN REGION</strong></td>
+                                                 <td class="uppercase"  ><strong>HOMETOWN REGION:</strong></td>
                                                 <td class="capitalize">{!! strtoupper($student->REGION) !!}</td>
 
                                             </tr>
                                             <tr>
-                                                 <td class="uppercase"><strong>RELIGION</strong></td>
+                                                 <td class="uppercase"><strong>RELIGION:</strong></td>
                                                 <td class="capitalize">{!! strtoupper($student->RELIGION) !!}</td>
 
                                                 
                                             </tr>
                                             <tr>
-                                                 <td class="uppercase"><strong>NATIONALITY</strong></td>
-                                                <td class="capitalize">{!! strtoupper($student->COUNTRY )!!}</td>
+                                                 <td class="uppercase"><strong>NATIONALITY:</strong></td>
+                                                <td class="capitalize">{!! strtoupper($student->NATIONALITY )!!}</td>
 
                                             </tr>
 
@@ -300,6 +291,11 @@
 
                             </table>
                                </fieldset> 
+                    </div>
+                      
+                      <div id='page2'>
+                          
+                          
                       <fieldset><legend style="background-color:#1A337E;color:white;">GURADIAN INFORMATION</legend>
                              <table class="folder table">
                                 <tr>
@@ -311,7 +307,7 @@
 
                                             </tr>
                                             <tr>
-                                                <td class="uppercase"><strong>GURDIAN ADDRESS</strong></td>
+                                                <td class="uppercase"><strong>GURDIAN ADDRESS:</strong></td>
                                                 <td class="capitalize">{!! strtoupper($student->GURDIAN_ADDRESS) !!}</td>
 
                                             </tr>
@@ -326,7 +322,7 @@
 
                                             </tr>
                                             <tr>
-                                                <td class="uppercase"  ><strong>GUARDIAN OCCUPATION</strong></td>
+                                                <td class="uppercase"  ><strong>GUARDIAN OCCUPATION:</strong></td>
                                                 <td class="capitalize">{!! strtoupper($student->GURDIAN_OCCUPATION) !!}</td>
 
                                             </tr>
@@ -338,8 +334,8 @@
 
                             </table>
                     </fieldset>
-                        </div>
-                      <div id='page3'>
+                        
+                  
                             <fieldset><legend style="background-color:#1A337E;color:white;">CHOICE OF PROGRAMME</legend>
                                 <table class="folder table">
                                 <tr>
@@ -351,7 +347,7 @@
 
                                             </tr>
                                             <tr>
-                                                <td class="uppercase"><strong>SECOND CHOICE</strong></td>
+                                                <td class="uppercase"><strong>SECOND CHOICE:</strong></td>
                                                 <td class="capitalize">{!! strtoupper($sys->getProgramName($student->SECOND_CHOICE)) !!}</td>
 
                                             </tr>
@@ -380,10 +376,11 @@
                             </table>
                               </fieldset>   
                             <p>&nbsp;&nbsp;</p>
+                              <div id='page3'>
                             @if(@Auth::user()->FORM_TYPE!="BTECH")
                             <div class="row">
 
-                               <fieldset><legend style="background-color:#1A337E;color:white;">EXAMINATION RESULTS</legend>
+                               <fieldset><legend style="background-color:#1A337E;color:white;"> EXAMINATION RESULTS</legend>
 
                                    
                                 <table class="table table-responsive table-striped">
@@ -408,7 +405,12 @@
 
                                         <tr align="">
                                             <td> {{ strtoupper(@$row->INDEX_NO) }}</td>
+                                            @if($sys->getEntryName()=="WASSSCE" ||$sys->getEntryName()=="SSSCE")
+                                           
                                             <td> {{ strtoupper(@$row->subject->NAME)	 }}</td>
+                                            @else
+                                            <td> {{ strtoupper(@$row->SUBJECT)   }}</td>
+                                            @endif
                                             <td> {{ strtoupper(@$row->GRADE)	 }}</td>
                                             <td> {{ strtoupper(@$row->GRADE_VALUE)	 }}</td>
                                             <td> {{ strtoupper(@$row->EXAM_TYPE) }}</td>

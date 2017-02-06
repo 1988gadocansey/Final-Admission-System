@@ -45,6 +45,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/form/print', 'FormController@preview');
     Route::get('/form/completed', 'FormController@finanlize');
     Route::get('/form/letter', 'FormController@letter');
+    Route::get('/generate', 'FormController@generateAccounts');
      
 
    

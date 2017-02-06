@@ -71,7 +71,7 @@
                             </div>
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Title</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('title',array("MR"=>"MR","MRS"=>"MRS","MISS"=>"MISS","REV"=>"REV"),old('title',''),array('v-model'=>'title','v-form-ctrl'=>'','v-select'=>'','placeholder'=>'Select Title',"required"=>"required", "tabindex"=>"-1"))  !!}
+                                {!!   Form::select('title',array("MR"=>"MR","MRS"=>"MRS","MISS"=>"MISS","REV"=>"REV"),old('title'),array('v-model'=>'title','v-form-ctrl'=>'','v-select'=>'title','placeholder'=>'Select Title',"required"=>"required", "tabindex"=>"-1"))  !!}
 
                                 <p class="text-danger text-danger"  v-if="biodata.title.$error.required" >Title is required</p>                                 
 
@@ -81,13 +81,13 @@
 
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Marital Status</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('marital_status',array("Single"=>"Single","Married"=>"Married","Divorced"=>"Divorced"),old('marital_status',''),array('placeholder'=>'Select marital status',"required"=>"required", "tabindex"=>"-1","v-select"=>"marital_status","v-model"=>"marital_status","v-form-ctrl"=>"","id"=>"marital_status"))  !!}
+                                {!!   Form::select('marital_status',array("Single"=>"Single","Married"=>"Married","Divorced"=>"Divorced"),old('marital_status',@$data->MARITAL_STATUS),array('placeholder'=>'Select marital status',"required"=>"required", "tabindex"=>"-1","v-select"=>"marital_status","v-model"=>"marital_status","v-form-ctrl"=>"","id"=>"marital_status"))  !!}
                                 <p class="text-danger text-danger"  v-if="biodata.marital_status.$error.required" >Marital Status is required</p>                                 
 
                             </div>
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Gender</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('gender',array("Male"=>"Male","Female"=>"Female"),old('gender',''),array('placeholder'=>'Select gender',"required"=>"required", "tabindex"=>"-1","v-model"=>"gender","v-form-ctrl"=>"","v-select"=>"gender","style"=>"width: 100%"))  !!}
+                                {!!   Form::select('gender',array("Male"=>"Male","Female"=>"Female") ,old('gender'),array('placeholder'=>'Select gender',"required"=>"required", "tabindex"=>"-1","v-model"=>"gender","v-form-ctrl"=>"","v-select"=>"gender"))  !!}
                                 <p class="text-danger text-danger"  v-if="biodata.gender.$error.required" >Gender is required</p>                                 
 
                             </div>
@@ -102,21 +102,15 @@
 
                             </div>
                             @if(@\Auth::user()->COUNTRY=="GHANAIAN")
-                            <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Qualification 1</label>
+                            <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Qualification</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('qualification',array("FIRST DEGREE"=>"FIRST DEGREE","WASSSCE"=>"WASSSCE","SSSCE"=>"SSSCE","TEU/TECHNICAL CERTIFICATES"=>"TEU/TECHNICAL CERTIFICATES" ,"NVTI"=>"NVTI","NAPTEX"=>"NAPTEX","OTHERS"=>"OTHERS"),old('qualification',''),array('placeholder'=>'SELECT FIRST QUALIFICATION'))  !!}
+                                {!!   Form::select('qualification',array("WASSSCE"=>"WASSSCE","SSSCE"=>"SSSCE","TEU/TECHNICAL CERTIFICATES"=>"TEU/TECHNICAL CERTIFICATES" ,"NVTI"=>"NVTI","NAPTEX"=>"NAPTEX","OTHERS"=>"OTHERS") ,old('qualification',@$data->ENTRY_QUALIFICATION),array('placeholder'=>'SELECT FIRST QUALIFICATION'))  !!}
 
                                                             
 
                             </div>
 
-                            <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Qualification 2</label>
-                            <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('qualification2',array("FIRST DEGREE"=>"FIRST DEGREE","WASSSCE"=>"WASSSCE","SSSCE"=>"SSSCE","TEU/TECHNICAL CERTIFICATES"=>"TEU/TECHNICAL CERTIFICATES" ,"NVTI"=>"NVTI","NAPTEX"=>"NAPTEX","OTHERS"=>"OTHERS"),old('qualification2',''),array('placeholder'=>'SELECT SECOND QUALIFICATION ',"required"=>"required", "v-form-ctrl"=>"","v-select"=>"qualification2", "v-model"=>"qualification2"))  !!}
-
-                                <p class="text-danger text-danger"  v-if="biodata.qualification.$error.required" >Qualification is required</p>                                 
-
-                            </div>
+                           
                             @else
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Qualification</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
@@ -128,10 +122,20 @@
                             @endif
 
                         </div>
+                           @if(@\Auth::user()->COUNTRY=="GHANAIAN")
+                         <div class="form-group">
+                         <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Qualification 2</label>
+                            <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
+                                {!!   Form::select('qualification2',array("WASSSCE"=>"WASSSCE","SSSCE"=>"SSSCE","TEU/TECHNICAL CERTIFICATES"=>"TEU/TECHNICAL CERTIFICATES" ,"NVTI"=>"NVTI","NAPTEX"=>"NAPTEX","OTHERS"=>"OTHERS") ,old('qualification2',@$data->ENTRY_QAULIFICATION2),array('placeholder'=>'SELECT SECOND QUALIFICATION ', "v-form-ctrl"=>"","v-select"=>"qualification2"))  !!}
+
+                              
+                            </div>
+                         </div>
+                           @endif
                         <div class="form-group">
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Are you physically challenged?</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('disable',array("Yes"=>"Yes","No"=>"No"),old('disable',''),array('placeholder'=>'Select disability',"required"=>"required","tabindex"=>"-1","required"=>"required", "v-form-ctrl"=>"","v-select"=>"disable", "v-model"=>"disable"))  !!}
+                                {!!   Form::select('disable',array("Yes"=>"Yes","No"=>"No"), old('disable',@$data->PHYSICALLY_DISABLED),array('placeholder'=>'Select disability',"required"=>"required","tabindex"=>"-1","required"=>"required", "v-form-ctrl"=>"","v-select"=>"disable", "v-model"=>"disable"))  !!}
 
                                 <p class="text-danger text-danger"  v-if="biodata.disable.$error.required" >Disability status is required</p>                                 
 
@@ -139,11 +143,17 @@
                             <div v-if ="disable=='Yes'">
                                 <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Name of disability</label>
                                 <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                    <input type="text" id="disabilty" name="disability" class="form-control"   required="required"      v-model="disabilty"  v-form-ctrl>                                                              
+                                    <input type="text" id="disabilty" name="disability" class="form-control"   required="required"  value="{{@$data->DISABLED}}"    v-model="disability"  v-form-ctrl>                                                              
                                     <p class="text-danger text-danger"  v-if="biodata.disability.$error.required" >Disability name is required</p>                                 
 
                                 </div></div>
                         </div>
+                        
+                        
+                        
+                        
+                        
+                        
                         <center> <h5 class="text-success">ADDRESS AND LOCATION AND OTHER INFORMATION</h5><hr></center>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Hometown</label>
@@ -170,7 +180,8 @@
                             @if(@\Auth::user()->COUNTRY=="GHANAIAN")
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Region</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('region',$region ,array('placeholder'=>'select region',"required"=>"required", "tabindex"=>"-1","id"=>"region","v-model"=>"region","v-form-ctrl"=>"","v-select"=>"{{old('region')}}")   )  !!}    
+                                {!!   Form::select('region',(['' => 'Select Region'] +$region), 
+                                         old('region',@$data->REGION) ,array("required"=>"required", "tabindex"=>"-1","id"=>"region","v-model"=>"region","v-form-ctrl"=>"","v-select"=>"region")   )  !!}    
 
                                 <p class="text-danger text-danger"  v-if="biodata.region.$error.required" >Region is required</p>                                 
 
@@ -179,7 +190,8 @@
                             @else
                              <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Nationality</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('nationality',$country ,array('placeholder'=>'select nationality',"required"=>"required", "tabindex"=>"-1","v-model"=>"nationality","v-form-ctrl"=>"", "v-select"=>"nationality")   )  !!}
+                                {!!   Form::select('nationality',(['' => 'Select Nationality'] +$country), 
+                                         old('nationality',@$data->NATIONALITY) ,array('placeholder'=>'select nationality',"required"=>"required", "tabindex"=>"-1","v-model"=>"nationality","v-form-ctrl"=>"", "v-select"=>"nationality")   )  !!}
                                                              
                                 <p class="text-danger text-danger"  v-if="biodata.nationality.$error.required" >Nationality is required</p>                                 
 
@@ -207,11 +219,11 @@
                             <label class="col-md-3 control-label" for="radios">Are you bonded to any organization</label>  
                             <div class="col-md-3"> 
                                 <label class="radio-inline" for="radios-0">
-                                    <input name="bond" id="radios-0" value="Yes" checked="" type="radio">
+                                    <input name="bond" id="radios-0" value="YES" <?php if(@$data->BOND=="YES"){ echo "checked='checked'";}?> type="radio">
                                     Yes
                                 </label> 
                                 <label class="radio-inline" for="radios-1">
-                                    <input name="bond" id="radios-1" value="No" type="radio">
+                                    <input name="bond" id="radios-1" value="NO" <?php if(@$data->BOND=="NO"){echo "checked='checked'"; }?> type="radio">
                                     No
                                 </label> 
                             </div>  
@@ -302,6 +314,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                 <button type="submit"  v-show="biodata.$valid" class="btn btn-primary">Save</button>
+                                <button type="button" onclick="return alert('Please fill all required fields')"  v-show="biodata.$invalid" class="btn btn-danger">Save</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
                             </div>
                         </div>
@@ -361,6 +374,14 @@
         ready: function () {
         },
         data: {
+         title:"{{@$data->TITLE}}",
+          gender:"{{@$data->GENDER}}",
+         marital_status:"{{@$data->MARITAL_STATUS}}",
+         qualification2:"{{@$data->ENTRY_QAULIFICATION2}}",
+         disable:"{{@$data->PHYSICALLY_DISABLED}}",
+         region:"{{  @$data->REGION }}",
+        nationality : "{{  @$data->NATIONALITY }}",
+       religion : "{{  @$data->RELIGION }}",
             options: []
 
         },

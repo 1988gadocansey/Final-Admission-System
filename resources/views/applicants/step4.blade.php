@@ -80,7 +80,7 @@
           </td>
               
           <td>Date of Exam &nbsp;
-                <input required="" id="center" name="month[]" type="text" class="form-control" placeholder="MAY/JUNE 2001" required=''>
+                <input required="" id="center" name="month[]" type="text" class="form-control" placeholder="MAY, 2001" required=''>
             
           </td>
           <td>Exam Center &nbsp;
@@ -121,7 +121,7 @@
           </td>
               
           <td>Date of Exam &nbsp;
-                <input required="" id="center" name="month[]" type="text" class="form-control" placeholder="MAY/JUNE 2001" required=''>
+                <input required="" id="center" name="month[]" type="text" class="form-control" placeholder="MAY, 2001" required=''>
             
           </td>
           <td>Exam Center &nbsp;
@@ -163,7 +163,7 @@
           </td>
               
           <td>Date of Exam &nbsp;
-                <input required="" id="center" name="month[]" type="text" class="form-control" placeholder="MAY/JUNE 2001" required=''>
+                <input required="" id="center" name="month[]" type="text" class="form-control" placeholder="MAY, 2001" required=''>
             
           </td>
           <td>Exam Center &nbsp;
@@ -181,6 +181,7 @@
                 <table>
 
                     <tr><td><input type="submit" value="Save" id='save'   class="btn btn-primary">
+                             
                             <input type="reset" value="Cancel" class="btn btn-danger">
                         </td></tr></table></center>
                     </form>

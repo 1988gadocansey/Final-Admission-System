@@ -85,8 +85,8 @@ class SystemController extends Controller {
     public function getGradeSystemIDList() {
 
 
-        $grade = Models\GradeSystemModel::
-                lists('grade', 'grade');
+        $grade = Models\GradeSystemModel::where("value","!=","")->orderBy("grade")->lists('grade', 'grade');
+              
         return $grade;
     }
 
