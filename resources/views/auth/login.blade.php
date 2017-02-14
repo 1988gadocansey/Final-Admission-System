@@ -62,9 +62,10 @@
             <p class="center login-form-text" style='color:white'>TAKORADI TECHNICAL UNIVERSITY ADMISSIONS</p>
           </div>
         </div>
+  
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
-       
+        <center><p style="color:red">Please use Mozilla Firefox browser</p></center>
         <form class="login-form"  method="POST"  action="{{ url('login') }}">
              {!! csrf_field() !!}
              <div>&nbsp;</div>
@@ -93,7 +94,7 @@
               <table>
                   <tr>
                       <Td><button type="submit" class="btn waves-effect waves-light col s12">Login</button></Td>
-                      <td><a href='{{url("password/reset")}}'/>Forgot password??</a></td>
+                      <td><a href='#'/>Forgot password??</a></td>
              
                   </tr>
               </table>

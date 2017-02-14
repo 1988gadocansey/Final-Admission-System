@@ -5,18 +5,30 @@
 @inject('sys', 'App\Http\Controllers\SystemController')
 <link rel="stylesheet" href="{!! url('public/assets/css/print.css') !!}" media="all">  
 <style>
-    
-    @media print {
-        
-	#page1	{page-break-before:always;}
-	.condition	{page-break-before:always;}
-	#page2	{page-break-before:always;}
-        #page3	{page-break-before:always;}
-       #page4	{page-break-before:always;}
-        .school	{page-break-before:always;}
-	.page9	{page-break-inside:avoid; page-break-after:auto}
-	  }
-    .biodata{
+    html, body, #page3,  #page4, #page5 { float: none; }
+
+   @media print
+{
+    table {float: none !important; }
+  div { float: none !important; }
+   #page3  { page-break-inside: avoid; page-break-before: always; }
+   #page4  { page-break-inside: avoid; page-break-before: always; }
+}
+     
+@page {
+  size: A4;
+}
+ 
+table, figure {
+  page-break-inside: avoid;
+}
+fieldset legend {
+  page-break-before: always;
+}
+h1, h2, h3, h4, h5 {
+  page-break-after: avoid;
+}
+.biodata{
         padding: 1px;
     }
     body{
@@ -106,14 +118,17 @@
            @if(@\Auth::user()->FINALIZED!=1)
         <a href="{{url('/upload/photo')}}" class="btn btn-warning btn-sm">Edit Information</a>
        
-        <a href="{{url('/form/completed')}}" onclick="return confirm('Are you sure every information provided on this form is correct??. After submiting you cannot edit this form again')" id="final" class="btn btn-success btn-sm">Print Submit Form</a>
+        <a href="{{url('/form/completed')}}" onclick="return confirm('Are you sure every information provided on this form is correct??. After submiting you cannot edit this form again')" id="final" class="btn btn-success btn-sm">Submit Form</a>
+        <a onclick="javascript:printDiv('print')" class="btn btn-success">Click to print form</a>
+          
          @else
+          <a onclick="javascript:printDiv('print')" class="btn btn-success">Click to print form</a>
+        
           <a href="{{url('/logout')}}"   class="btn btn-danger">Click to logout</a>
-             <a onclick="javascript:printDiv('print')" class="btn btn-success">Click to print form</a>
-     
+             
           @endif
            <div class="panel panel-default">
-                <div class="panel-heading">FORM PREVIEW - CHECK EVERY INFORMATION ON THIS FORM @if(@\Auth::user()->BIODATA_DONE=="1")
+                <div class="panel-heading"><span style="color:red">FORM PREVIEW - CHECK EVERY INFORMATION ON THIS FORM. AFTER SUBMITTING IF YOU SEEN A BLANK SCREEN PLEASE CLICK THE BACK BUTTON ON YOUR BROWSER AND RELOAD YOUR PAGE AGAIN</span> @if(@\Auth::user()->BIODATA_DONE=="1")
                     <div style="float: right">
                           
                         @if(@\Auth::user()->FORM_TYPE!="BTECH")
@@ -376,11 +391,11 @@
                             </table>
                               </fieldset>   
                             <p>&nbsp;&nbsp;</p>
-                              <div id='page3'>
+                              <div id='page2'>
                             @if(@Auth::user()->FORM_TYPE!="BTECH")
                             <div class="row">
 
-                               <fieldset><legend style="background-color:#1A337E;color:white;"> EXAMINATION RESULTS</legend>
+                                <fieldset><center><legend style="background-color:#1A337E;color:white;"><span> EXAMINATION RESULTS</span></legend></center>
 
                                    
                                 <table class="table table-responsive table-striped">
@@ -430,7 +445,8 @@
                         </div>
                             @endif
                   </div>
-                      <div id='page4'>
+                            <p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p>
+                      <div id='page2'>
                           <div class="watermark">
                             <div> <fieldset><legend style="background-color:#1A337E;color:white;">DECLARATION</legend>
                                 
@@ -522,11 +538,18 @@
     </div>
 </div>
 @endsection
-
+<script>
+    $(document).ready(function(){
+        // Wrap each tr and td's content within a div
+        // (todo: add logic so we only do this when printing)
+        $("table tbody th, table tbody td").wrapInner("<div></div>");
+    })
+</script>
 <script>
 $('#final').click(function(){
      /* when the submit button in the modal is clicked, submit the form */
     alert('Finalizing and submitting form to the University wait....');
     $('#formfield').submit();
 });
+
 </script>

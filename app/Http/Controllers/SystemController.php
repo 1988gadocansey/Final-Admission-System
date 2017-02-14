@@ -145,34 +145,34 @@ class SystemController extends Controller {
     public function getProgramList() {
         $formType = @\Auth::user()->FORM_TYPE;
         if ($formType == "HND" || $formType=="MATURE") {
-            $program = \DB::table('tpoly_programme')->where("TYPE",   "HND")->orderby("PROGRAMME")
+            $program = \DB::table('tpoly_programme')->where("TYPE",   "HND")->where("RUNNING","1")->orderby("PROGRAMME")
                     ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
         }
         elseif($formType == "DIPLOMA"){
-             $program = \DB::table('tpoly_programme')->where("TYPE", "LIKE", "DIPLOMA%")->orderby("PROGRAMME")
+             $program = \DB::table('tpoly_programme')->where("TYPE", "LIKE", "DIPLOMA%")->where("RUNNING","1")->orderby("PROGRAMME")
                     ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
         }
         
        elseif($formType == "BTECH"){
-            $program = \DB::table('tpoly_programme')->where("TYPE",   "BTECH")->orderby("PROGRAMME")
+            $program = \DB::table('tpoly_programme')->where("TYPE",   "BTECH")->where("RUNNING","1")->orderby("PROGRAMME")
                     ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
         }
          elseif($formType == "CERTIFICATES"){
-            $program = \DB::table('tpoly_programme')->where("TYPE",    "CERTIFICATE")->orderby("PROGRAMME")
+            $program = \DB::table('tpoly_programme')->where("TYPE",    "CERTIFICATE")->where("RUNNING","1")->orderby("PROGRAMME")
                     ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
 
         }
         elseif($formType == "ACCESS COURSE"){
-            $program = \DB::table('tpoly_programme')->where("TYPE", "LIKE",  "%ACCESS%")->orderby("PROGRAMME")
+            $program = \DB::table('tpoly_programme')->where("TYPE", "LIKE",  "%ACCESS%")->where("RUNNING","1")->orderby("PROGRAMME")
                     ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
         }
         else{
-            $program = \DB::table('tpoly_programme')->orderby("PROGRAMME")
+            $program = \DB::table('tpoly_programme')->where("RUNNING","1")->orderby("PROGRAMME")
                     ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
         }

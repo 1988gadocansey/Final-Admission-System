@@ -554,6 +554,7 @@ class FormController extends Controller {
                 if ($_FILES['picture']['size'] <= $max_size) {
 
                     $savepath = 'public/uploads/photos/';
+                    
                     if (empty($applicantNO)) {
                         $sql = \DB::table('tbl_form_number')->get();
                         $new_formNo = $sql[0]->FORM_NO;
@@ -652,10 +653,12 @@ class FormController extends Controller {
             registrar@ttu.edu.gh</p>";
                     "<p>Best regards</p>";
 
-                    if (@mail($email, "Takoradi Technical University Admissions", $email_message, $headers)) {
-                          return redirect("/form/preview");
-                    }
-                       return redirect("/form/preview");
+                  // @mail($email, "Takoradi Technical University Admissions", $email_message, $headers) ;
+                     return @redirect("/form/preview");
+
+               // return @redirect()->route('/form/preview');
+
+                   
                 
             } else {
                 $headers = 'MIME-Version: 1.0' . "\r\n";
@@ -681,11 +684,10 @@ class FormController extends Controller {
             registrar@ttu.edu.gh</p>";
                 "<p>Best regards</p>";
 
-                if (@mail($email, "Takoradi Technical University Admissions", $email_message, $headers)) {
-                     return redirect("/form/preview");
+                @mail($email, "Takoradi Technical University Admissions", $email_message, $headers);
+                     return @redirect("/form/preview");
       
-                }
-                 return redirect("/form/preview");
+                 
       
                 
             }
@@ -725,8 +727,8 @@ class FormController extends Controller {
     }
     
     public function generateAccounts() {
-        ini_set('max_execution_time', 3000); //300 seconds = 5 minutes
-         $form=  Models\ExcelForm::where('id','!=','0')->get();
+        ini_set('max_execution_time', 30000); //300 seconds = 5 minutes
+         $form=  Models\ExcelForm::where("SOLD_BY","CAMPUS")->get();
          foreach($form as $users=>$row){
              
              
