@@ -88,6 +88,83 @@ class FormController extends Controller {
             }
         }
     }
+    /*
+     * @param array of grades
+     * count the number of failed subjects
+     */
+     public function CountFails($array){
+        $fail=0;
+       
+        foreach($array AS $value){
+            // echo "value:$value</br>";
+            if($value>7){
+
+                 $fail++;
+            }
+
+
+        }
+                   return $fail;
+
+    }
+    // list the total failed and passed subjects
+    public function CheckFails($applicant){
+            $subject_array_core=array();
+            $subject_array_core_alt=array();
+            $subject_array_elect=array();
+            $form= $applicant;
+            $qualification=array("WASSSCE","SSSCE","NAPTEX","TEU");
+       // $query=  mysql_query("SELECT APP_FORM,ENTRY_TYPE,FIRST_CHOICE FROM tbl_applicants WHERE   APP_FORM='$form' ");
+      $query=@Models\ApplicantModel::where("APPLICATION_NUMBER", $form)->get();
+ 
+      
+        foreach($query as $row){
+            if(in_array($row->ENTRY_QUALIFICATION, $qualification)){
+                $resultQuery=@Models\ExamResultsModel::where("APPLICATION_NUMBER", $form)->orderBy("GRADE_VALUE","DESC")->get();
+            
+                foreach($resultQuery as $value){
+                     if($value->TYPE=='core'){
+                            @$subject_array_core[@$value->subject->NAME]=@$value->GRADE_VALUE;
+                        }
+                        elseif($value->TYPE=='core_alt'){
+                            $subject_array_core_alt[@$value->subject->NAME]=@$value->GRADE_VALUE;
+                        }
+                        else{
+                            $subject_array_elect[@$value->subject->NAME]=@$value->GRADE_VALUE;
+                        }
+                }
+                
+               if(count($subject_array_core)<2){$error="Core Subjects not met. minimum pass of two compulsory cores i.e Core Maths and English<br/>"; $qualify="No"; }
+		
+               if(count($subject_array_core_alt)==0){$error.="Core  Alternative Subject not met. Either pass in Social studies or Integrated Science <br/>"; $qualify="No"; }
+		
+               if(count($subject_array_core)+count($subject_array_core_alt)+count($subject_array_elect)!=6){$error.="Passes in at least 6 subjects required <br/>"; $qualify="No";}
+                
+                @sort($subject_array_core_alt);  @sort($subject_array_core);   @sort($subject_array_elect);
+        
+              $elective_slice=  @array_slice($subject_array_elect, 0,3);
+              $core_alt_slice=  @array_slice($subject_array_core_alt, 0,1);
+
+            $grade=  (  array_sum($subject_array_core) +  array_sum($elective_slice)+ array_sum($core_alt_slice));
+           
+            $total=  $this->CountFails($subject_array_core)+ $this->CountFails($elective_slice) + $this->CountFails($core_alt_slice);   
+               
+            if ($qualify == "Yes") {
+                    $status = "Qualify?" . $qualify . " - " . " Total Failed: " . $total;
+                } else {
+                    $status = "Qualify?" . $qualify . " - " . $error . " - " . " Total Failed: " . $total;
+                }
+                
+             return    mysql_query("UPDATE tbl_applicants SET STATUS='$status' , GRADE='$grade' WHERE APP_FORM='$form'");
+            
+             @Models\ApplicantModel::where("APPLICATION_NUMBER", $form)->update(array("ELIGIBILTY"=>$status,"QUALIFY"=>$qualify,"GRADE"=>$grade));   
+                
+            } else{
+                $qualify="Yes";
+            }
+        }
+   
+    }
 
     public function step4(Request $request, SystemController $sys) {
         if (@\Auth::user()->STARTED == 1 && @\Auth::user()->PHOTO_UPLOAD == "YES") {
