@@ -27,17 +27,28 @@ class FormController extends Controller {
     public function letter(Request $request, SystemController $sys) {
         $array = $sys->getSemYear();
         $sem = $array[0]->SEMESTER;
-        $year = $array[0]->YEAR;
+        $year = "2017/2018";
         $applicant = @\Auth::user()->FORM_NO;
 
-        $query = @Models\ApplicantModel::where("APPLICATION_NUMBER", $applicant)->where("ADMITTED", "1")->first();
+        $query = @Models\ApplicantModel::where("APPLICATION_NUMBER", $applicant)
+                ->where("ADMISSION_FEES",">",0)
+                ->where("ADMITTED", "1")->first();
 
         return view("applicants.letter")->with("data", $query)->with('year', $year);
     }
 
     public function index() {
+        $applicant = @\Auth::user()->FORM_NO;
 
+        $query = @Models\ApplicantModel::where("APPLICATION_NUMBER", $applicant)
+                ->where("ADMISSION_FEES",">",0)
+                ->where("ADMITTED", "1")->first();
+        if($query->STATUS=="APPLICANT" || $query->ADMISSION_FEES==0){
         return view("dashboard");
+        }
+        else{
+            return redirect("/form/letter");
+        }
     }
 
     public function sms() {
@@ -805,7 +816,7 @@ class FormController extends Controller {
     
     public function generateAccounts() {
         ini_set('max_execution_time', 30000); //300 seconds = 5 minutes
-         $form=  Models\ExcelForm::where("SOLD_BY","CAMPUS")->get();
+         $form=  Models\ExcelForm::where("SOLD_BY","UBA")->get();
          foreach($form as $users=>$row){
              
              

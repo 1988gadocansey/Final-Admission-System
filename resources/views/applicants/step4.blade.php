@@ -207,7 +207,7 @@
                                             <th data-field="price">INDEXNO</th>
                                             <th data-field="name">SUBJECT</th>
                                             <th data-field="price">GRADE</th>
-                                              @if($entry->getEntryName()=="WASSSCE" ||$sys->getEntryName()=="SSSCE")
+                                              @if($entry->getEntryName()=="WASSSCE" ||$entry->getEntryName()=="SSSCE")
                                           
                                             <th data-field="price">VALUE</th>
                                             @endif
@@ -226,14 +226,14 @@
                                         <tr align="">
                                             <td> {{ $data->perPage()*($data->currentPage()-1)+($index+1) }} </td>
                                             <td> {{ @$row->INDEX_NO }}</td>
-                                              @if($entry->getEntryName()=="WASSSCE" ||$sys->getEntryName()=="SSSCE")
+                                              @if($entry->getEntryName()=="WASSSCE" ||$entry->getEntryName()=="SSSCE")
                                            
                                             <td> {{ @$row->subject->NAME	 }}</td>
                                             @else
                                             <td> {{ @$row->SUBJECT   }}</td>
                                             @endif
                                             <td> {{ @$row->GRADE	 }}</td>
-                                            @if($entry->getEntryName()=="WASSSCE" ||$sys->getEntryName()=="SSSCE")
+                                            @if($entry->getEntryName()=="WASSSCE" ||$entry->getEntryName()=="SSSCE")
                                           
                                             <td> {{ @$row->GRADE_VALUE	 }}</td>
                                             @endif

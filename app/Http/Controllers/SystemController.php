@@ -248,73 +248,61 @@ class SystemController extends Controller {
  public function firesms($message,$phone,$receipient){
           
          
-        
-        //print_r($contacts);
-        if (!empty($phone)&& !empty($message)&& !empty($receipient)) {
+           if (!empty($phone)&& !empty($message)&& !empty($receipient)) {
              \DB::beginTransaction();
             try {
 
                  
-                //$key = "83f76e13c92d33e27895";
-                $message = urlencode($message);
-                $phone=$phone; // because most of the numbers came from excel upload
-                 
-                 $phone="+233".\substr($phone,-9);
-            $url = 'http://txtconnect.co/api/send/'; 
-            $fields = array( 
-            'token' => \urlencode('a166902c2f552bfd59de3914bd9864088cd7ac77'), 
-            'msg' => \urlencode($message), 
-            'from' => \urlencode("TPOLY"), 
-            'to' => \urlencode($phone), 
-            );
-            $fields_string = ""; 
-                    foreach ($fields as $key => $value) { 
-                    $fields_string .= $key . '=' . $value . '&'; 
-                    } 
-                    \rtrim($fields_string, '&'); 
-                    $ch = \curl_init(); 
-                    \curl_setopt($ch, \CURLOPT_URL, $url); 
-                    \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, true); 
-                    \curl_setopt($ch, \CURLOPT_FOLLOWLOCATION, true); 
-                    \curl_setopt($ch, \CURLOPT_POST, count($fields)); 
-                    \curl_setopt($ch, \CURLOPT_POSTFIELDS, $fields_string); 
-                    \curl_setopt($ch, \CURLOPT_SSL_VERIFYPEER, 0); 
-                    $result2 = \curl_exec($ch); 
-                    \curl_close($ch); 
-                    $data = \json_decode($result2); 
-                    $output=@$data->error;
-                    if ($output == "0") {
+                $phone="+233".\substr($phone,1,9);
+            $phone = str_replace(' ', '', $phone);
+                 $phone = str_replace('-', '', $phone);
+                 if (!empty($message) && !empty($phone)) {
+           $key = "bcb86ecbc1a058663a07"; //your unique API key;
+          $message=urlencode($message); //encode url;
+        $sender_id="TTU";
+
+        $url = "http://sms.gadeksystems.com/smsapi?key=$key&to=$phone&msg=$message&sender_id=$sender_id";
+        //print_r($url);
+        $result = file_get_contents($url); //call url and store result;
+
+                   if ($result = 1000) {
+
                    $result="Message was successfully sent"; 
                    
                     }else{ 
-                    $result="Message failed to send. Error: " .  $output; 
+                    $result="Message failed to send. Error: " .  $result; 
                      
                     } 
-                     
-                  
-                $array=  $this->getSemYear();
-                $sem=$array[0]->SEMESTER;
-                $year=$array[0]->YEAR;
-                  $user = \Auth::user()->ID;
+                    $array=  $this->getSemYear();
+        $sem=$array[0]->SEMESTER;
+               $year=$array[0]->YEAR;
+                  $user = \Auth::user()->serial; 
+                
+                 
+                  $user = \Auth::user()->fund;
                   $sms=new MessagesModel();
                     $sms->dates=\DB::raw("NOW()");
                     $sms->message=$message;
                     $sms->phone=$phone;
                     $sms->status=$result;
-                    $sms->type="Applicant form submitted";
+                    $sms->type="Admission Notifications";
+                    
                     $sms->sender=$user;
-                    $sms->term=$sem;
-                    $sms->year=$year;
+              $sms->term=$sem;
+                   $sms->year=$year;
                     $sms->receipient=$receipient;
                      
                    $sms->save();
                    \DB::commit();
-                   
-                  // return redirect("/logout");
-               } catch (\Exception $e) {
+            }
+            
+                    }
+            catch (\Exception $e) {
                 \DB::rollback();
             }
-            }
+        }
+     
+       
         
     }
 }

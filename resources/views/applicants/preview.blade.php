@@ -465,7 +465,7 @@ h1, h2, h3, h4, h5 {
                <fieldset><legend style="background-color:#1A337E;color:white;">CORROBORATIVE DECLARATION</legend>
                    <p>(Please read the instructions carefully before you endorse this form)</p>
                    <p></p>
-                   <p>1. This declaration should be signed a person of high integrity and honour who must also endorse at least one of the candidate's passport size photographs on the reverse side and also satisfy him/herself that the examination grades indicated
+                   <p>1. This declaration should be signed by a person of high integrity and honour who must also endorse at least one of the candidate's passport size photographs on the reverse side and also satisfy him/herself that the examination grades indicated
                    on the form by the applicant are true.
                    <p>2. The application will not be valid if the declaration below is not signed</p>
                    <p>3.If the declaration proves to be false, the application shall be rejected; if falsely detected after admission, the student shall be dismissed.</p>
