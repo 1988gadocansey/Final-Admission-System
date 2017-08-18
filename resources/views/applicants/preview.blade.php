@@ -131,7 +131,7 @@ h1, h2, h3, h4, h5 {
                 <div class="panel-heading"><span style="color:red">FORM PREVIEW - CHECK EVERY INFORMATION ON THIS FORM. AFTER SUBMITTING IF YOU SEEN A BLANK SCREEN PLEASE CLICK THE BACK BUTTON ON YOUR BROWSER AND RELOAD YOUR PAGE AGAIN</span> @if(@\Auth::user()->BIODATA_DONE=="1")
                     <div style="float: right">
                           
-                        @if(@\Auth::user()->FORM_TYPE!="BTECH")
+                        @if(@\Auth::user()->FORM_TYPE!="BTECH"|| @\Auth::user()->FORM_TYPE!="MTECH")
                         <a class="text-success"  style="color: red" href="{{url('/form/academic/grades')}}">Previous Step</a>
                         @else
                         <a class="text-success"  style="color: red" href="{{url('/form/step3')}}">Previous Step</a>
@@ -381,8 +381,13 @@ h1, h2, h3, h4, h5 {
                                                 <td class="capitalize">{!! strtoupper($student->ENTRY_QUALIFICATION) !!}</td>
 
                                             </tr>
+                                        @if(@Auth::user()->FORM_TYPE=="MTECH")
+                                        <tr>
+                                                <td class="uppercase"  ><strong>CLASS:</strong></td>
+                                                <td class="capitalize">{!! strtoupper($student->CLASS) !!}</td>
 
-
+                                            </tr>
+                                        @endif
                                         </table>
                                     </td>
                                 </tr>
@@ -392,7 +397,7 @@ h1, h2, h3, h4, h5 {
                               </fieldset>   
                             <p>&nbsp;&nbsp;</p>
                               <div id='page2'>
-                            @if(@Auth::user()->FORM_TYPE!="BTECH")
+                            @if(@Auth::user()->FORM_TYPE=="HND" || @Auth::user()->FORM_TYPE=="DIPLOMA" || @Auth::user()->FORM_TYPE=="ACCESS"|| @Auth::user()->FORM_TYPE=="MATURE")
                             <div class="row">
 
                                 <fieldset><center><legend style="background-color:#1A337E;color:white;"><span> EXAMINATION RESULTS</span></legend></center>

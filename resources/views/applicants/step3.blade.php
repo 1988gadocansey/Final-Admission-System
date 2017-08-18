@@ -98,7 +98,7 @@
                                 <p class="text-danger text-danger"  v-if="biodata.secondChoice.$error.required" >Third  Choice is required</p>                                 
 
                             </div>
-                             @if(@Auth::user()->FORM_TYPE=="BTECH")
+                             @if(@Auth::user()->FORM_TYPE=="BTECH" || @Auth::user()->FORM_TYPE=="MTECH" )
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label"> </label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
                               {!!   Form::select('class',array("FIRST CLASS"=>"FIRST CLASS","SECOND CLASS UPPER"=>"SECOND CLASS UPPER","SECOND CLASS LOWER"=>"SECOND CLASS LOWER","THIRD CLASS"=>"THIRD CLASS","PASS"=>"PASS"),old('class',@$data->CLASS),array('placeholder'=>'Select Class obtained',"tabindex"=>"-1", "v-model"=>"class","v-form-ctrl"=>"","v-select"=>"class","required"=>""))  !!}

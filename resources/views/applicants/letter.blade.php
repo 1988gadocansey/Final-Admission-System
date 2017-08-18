@@ -85,11 +85,11 @@ overflow:hidden;
             <div id='page1'>
                         <table border='0'>
                             <tr>
-                                <td> <img src='{{url("public/assets/img/admissions.jpg")}}' style=""  class="image-responsive"/> 
+                                 <td> <img  style="width:767px;height: auto" src='{{url("public/assets/img/header.jpg")}}' style=""  class="image-responsive"/> 
 
                                  <td>
                                 <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
-                                      <img   style="width:106px;height: auto;margin-left: -3px;    margin-top: -34px; "  <?php
+                                      <img   style="width:106px;height: 134px;margin-left: -3px;    margin-top: -34px; "  <?php
                                         $pic = $data->APPLICATION_NUMBER;
                                         echo $sys->picture("{!! url(\"public/albums/applicants/$pic.jpg\") !!}", 90)
                                         ?>  src="http://application.ttuportal.com/public/uploads/photos/{{$data->APPLICATION_NUMBER}}.jpg"alt="photo"     />
@@ -112,28 +112,28 @@ overflow:hidden;
                                 <p>We write on behalf of the Academic Board to offer you admission to Takoradi  Technical University to pursue a programme of study leading to the award of 
                        @if(0===strpos($data->PROGRAMME_ADMITTED,'B'))
                                    @elseif(0===strpos($data->PROGRAMME_ADMITTED,'C') || 0===strpos($data->PROGRAMME_ADMITTED,'A'))
-                                   Certificate,
+                                 
                                       @elseif(0===strpos($data->PROGRAMME_ADMITTED,'H'))
-                                      Higher National Diploma,
+                                    
                                        @elseif(0===strpos($data->PROGRAMME_ADMITTED,'D'))
-                                       Diploma,
+                                       
                                       @else
                                       @endif<b> {{$sys->getProgram($data->PROGRAMME_ADMITTED)}}</b>. The duration of the programme is {{$sys->getProgramDuration($data->PROGRAMME_ADMITTED)}} Academic years. A change of Programme is <strong><b>NOT ALLOWED</b>.</strong></p>
                                 <p><b>Note A mandatory Preparatory course in Engineering Mathematics</b>  and <b> Engineering Science </b>will be organized for all applicants from Technical Institutions to build up their capacity in<b> Elective Mathematics required for HND programme. </b>The preparatory course starts from <b>Monday 24th July</b> and ends on <b>Friday18th August 2017</b>. You are therefore required to pay a <b>non-refundable special tuition fee of GH¢200</b> at any branch of <b>Capital Bank, into Accounts Number, 2220001961011</b>. There is an <b>option for accommodation on campus during the preparatory course at a fee of GH¢ 75 for interested individuals also to be paid into the same Bank Accounts above</b>.
                                 </p>
-                                <p>1. Your admission is for the<b> {{$year}} </b>Academic year. If you fail to enroll or withdraw from the programme without prior approval of the University, you will forfeit the admission automatically.</p>
+                                <p>1. Your admission is for the<b> {{$year}} </b>Academic year. If you fail to enroll or withdraw from the programme without prior approval of the University, you will forfeits the admission automatically.</p>
                               
-                                <p>2. The<b> {{$year}} academic year</b> is scheduled to begin on <b> Monday 28th August   {{date('Y')}}</b>. You are however expected to report for medical examination and registration from <b>Monday 28th August {{date('Y')}} to Friday 8th September  {{date('Y')}}</b>.You are mandated to participate in orientation programme which will run from <b>Monday 4th September to Friday 8th September {{date('Y')}}</b>.</p>
+                                <p>2. The<b> {{$year}} academic year</b> is scheduled to begin on <b> Monday 28th August   {{date('Y')}}</b>. You are expected to report for medical examination and registration from <b>Monday 28th August {{date('Y')}} to Friday 8th September  {{date('Y')}}</b>.You are mandated to participate in orientation programme which will run from <b>Monday 4th September to Friday 8th September {{date('Y')}}</b>.</p>
                                 
-                                 <p>3. You are required to make full payment of <b>non-refundable fee </b> of <b>GHS{{ $data->ADMISSION_FEES}}</b> at any branch of
+                                 <p>3. You are required to make <b>PROVISIONAL PAYMENT</b> of <b>GHS{{ $data->ADMISSION_FEES}}</b> at any branch of
                                
                                   @if($data->admitedProgram->TYPE=="NON TERTIARY")
-                                     <b> UNIBANK into Account Number   1570105703613</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                     <b> UNIBANK into Account Number   1570105703613</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                    @elseif(strpos($sys->getProgram($data->PROGRAMME_ADMITTED),"Evening")!==false)  
-                                         <b> Ecobank into Account Number   0189104488868901</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                         <b> Ecobank into Account Number   0189104488868901</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                               
                                  @else
-                                        <b>{{strtoupper(@$data->admitedProgram->department->schools->banks->NAME)}} into Account Number {{@$data->admitedProgram->department->schools->banks->ACCOUNT_NUMBER}}</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                        <b>{{strtoupper(@$data->admitedProgram->department->schools->banks->NAME)}} into Account Number {{@$data->admitedProgram->department->schools->banks->ACCOUNT_NUMBER}}</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                    
                                       @endif
                             <p>4. You will be on probation for the full duration of your programme and may be dismissed at any time for unsatisfactory academic work or misconduct. You will be required to adhere to <b>ALL</b> the rules and regulations of the University as contained in the University Statutes, Examination Policy, Ethics Policy and Students' Handbook.</p>
@@ -144,7 +144,7 @@ overflow:hidden;
                            
                             <p>7. The University does not give financial assistance to students. It is therefore the responsibility of students to arrange for their own sponsorship and maintenance during the period of study.</p>
                             </div>
-                            <p>8. You are required to note that the University is a secular institution and is therefore not bound by observance of any religious or sectarian practices. As much as possible the University lectures and / or examination would be scheduled to take place within normal working days, but where it is not feasible, lectures and examination would be held on other days.</p>
+                            <p>8. You are to note that the University is a secular institution and is therefore not bound by observance of any religious or sectarian practices. As much as possible the University lectures and / or examination would be scheduled to take place within normal working days, but where it is not feasible, lectures and examination would be held on other days.</p>
                            <div id='page2'>
                             <p>9. As a policy of the University, all students shall be required to register under the National Health Insurance Scheme (NHIS) on their own to enable them access medical care whilst on campus.</p>
                            
@@ -156,8 +156,8 @@ overflow:hidden;
                            NOTE: Hall fees paid is not refundable.
                            </p>
                             @endif
-                            <p>11. Any applicant who falsified results will be withdrawn from the university and will forfeit his/her fees paid.</p>
-                            <p>You are required to make the payment before or on Friday 30th June {{date('Y')}}. </p>
+                            <p>11. Any applicant who falsified results will be withdrawn from the university and will forfeits his/her fees paid.</p>
+                            <p>You are required to make <b>PROVISIONAL PAYMENT</b> of all fees before or on Monday 28th August {{date('Y')}}. </p>
  
                            <p>Please, accept my congratulations on your admission to the University.</p>
                           
@@ -191,35 +191,34 @@ overflow:hidden;
                            
                             <div style="margin-left: 0px;text-align: justify">
                                
-                                <centerd><b><p class="">OFFER OF ADMISSION  - {{ strtoupper(@$data->admitedProgram->department->schools->FACULTY)}}  -  ADMISSION N<u>O </u>: {{$data->APPLICATION_NUMBER}}</p></b></center>
+                                <centerd><b><p class="">OFFER OF ADMISSION(<b>PROVISONAL</b>) - {{ strtoupper(@$data->admitedProgram->department->schools->FACULTY)}}  -  ADMISSION N<u>O </u>: {{$data->APPLICATION_NUMBER}}</p></b></center>
                                 <hr>
                                 <p>We write on behalf of the Academic Board to offer you admission to Takoradi  Technical University to pursue a programme of study leading to the award of 
                                     
-                                    <p>We write on behalf of the Academic Board to offer you admission to Takoradi  Technical University to pursue a programme of study leading to the award of
-                                    
+                                     
                                     @if(0===strpos($data->PROGRAMME_ADMITTED,'B'))
                                    @elseif(0===strpos($data->PROGRAMME_ADMITTED,'C') || 0===strpos($data->PROGRAMME_ADMITTED,'A'))
-                                   Certificate,
+                                
                                       @elseif(0===strpos($data->PROGRAMME_ADMITTED,'H'))
-                                      Higher National Diploma,
+                                    
                                        @elseif(0===strpos($data->PROGRAMME_ADMITTED,'D'))
-                                       Diploma,
+                                       
                                       @else
                                       @endif<b> {{$sys->getProgram($data->PROGRAMME_ADMITTED)}}</b>. The duration of the programme is {{$sys->getProgramDuration($data->PROGRAMME_ADMITTED)}} Academic years. A change of Programme is <strong><b>NOT ALLOWED</b>.</strong></p>
                                 <p><b><i>Note: Your admission is <b>PROVISIONAL</b>, you are therefore, required to present your results to the university’s admissions office after it is published, to enable the office regularlised your admission.</b></i></p>
                                
-                                <p>1. Your admission is for the<b> {{$year}} </b>Academic year. If you fail to enroll or withdraw from the programme without prior approval of the University, you will forfeit the admission automatically.</p>
+                                <p>1. Your admission is for the<b> {{$year}} </b>Academic year. If you fail to enroll or withdraw from the programme without prior approval of the University, you will forfeits the admission automatically.</p>
                               
-                                <p>2. The<b> {{$year}} academic year</b> is scheduled to begin on <b> Monday 28th August   {{date('Y')}}</b>. You are however expected to report for medical examination and registration from <b>Monday 28th August {{date('Y')}} to Friday 8th September  {{date('Y')}}</b>.You are mandated to participate in orientation programme which will run from <b>Monday 4th September to Friday 8th September {{date('Y')}}</b>.</p>
+                                <p>2. The<b> {{$year}} academic year</b> is scheduled to begin on <b> Monday 28th August   {{date('Y')}}</b>. You are expected to report for medical examination and registration from <b>Monday 28th August {{date('Y')}} to Friday 8th September  {{date('Y')}}</b>.You are mandated to participate in orientation programme which will run from <b>Monday 4th September to Friday 8th September {{date('Y')}}</b>.</p>
                                 
-                                 <p>3. You are required to make full payment of <b>non-refundable fee </b> of <b>GHS{{ $data->ADMISSION_FEES}}</b> at any branch of 
+                                 <p>3. You are required to make <b>PROVISIONAL PAYMENT</b> of  <b>GHS{{ $data->ADMISSION_FEES}}</b> at any branch of 
                                       @if($data->admitedProgram->TYPE=="NON TERTIARY")
-                                     <b> UNIBANK into Account Number   1570105703613</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                     <b> UNIBANK into Account Number   1570105703613</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                    @elseif(strpos($sys->getProgram($data->PROGRAMME_ADMITTED),"Evening")!==false)  
-                                         <b> Ecobank into Account Number   0189104488868901</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                         <b> Ecobank into Account Number   0189104488868901</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                
                                  @else
-                                        <b>{{strtoupper(@$data->admitedProgram->department->schools->banks->NAME)}} into Account Number {{@$data->admitedProgram->department->schools->banks->ACCOUNT_NUMBER}}</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                        <b>{{strtoupper(@$data->admitedProgram->department->schools->banks->NAME)}} into Account Number {{@$data->admitedProgram->department->schools->banks->ACCOUNT_NUMBER}}</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                    
                                       @endif
                             <p>4. You will be on probation for the full duration of your programme and may be dismissed at any time for unsatisfactory academic work or misconduct. You will be required to adhere to <b>ALL</b> the rules and regulations of the University as contained in the University Statutes, Examination Policy, Ethics Policy and Students' Handbook.</p>
@@ -230,7 +229,7 @@ overflow:hidden;
                            
                             <p>7. The University does not give financial assistance to students. It is therefore the responsibility of students to arrange for their own sponsorship and maintenance during the period of study.</p>
                             </div>
-                            <p>8. You are required to note that the University is a secular institution and is therefore not bound by observance of any religious or sectarian practices. As much as possible the University lectures and / or examination would be scheduled to take place within normal working days, but where it is  not feasible, lectures and examination would be held on other days.</p>
+                            <p>8. You are to note that the University is a secular institution and is therefore not bound by observance of any religious or sectarian practices. As much as possible the University lectures and / or examination would be scheduled to take place within normal working days, but where it is  not feasible, lectures and examination would be held on other days.</p>
                            <div id='page2'>
                             <p>9. As a policy of the University, all students shall be required to register under the National Health Insurance Scheme (NHIS) on their own to enable them access medical care whilst on campus.</p>
                            
@@ -242,8 +241,8 @@ overflow:hidden;
                              <p>10. You have been given Hall Accommodation at<b> {{strtoupper($data->HALL_ADMITTED)}} Hall </b>. You will be required to make payment of  GHS{{$sys->hallFees($data->HALL_ADMITTED)}} into any branch of Zenith Bank Ghana with account number  {{$sys->hallAccount($data->HALL_ADMITTED)}}. <b/>You shall report to your assigned hall of residence with the original copy of pay-in-slip
                            NOTE: Hall fees paid is not refundable.
                              @endif
-                            <p>11. Any applicant who falsified results will be withdrawn from the university and will forfeit his/her fees paid.</p>
-                            <p>You are required to make the payment before or on Friday 30th June {{date('Y')}}. </p>
+                            <p>11. Any applicant who falsified results will be withdrawn from the university and will forfeits his/her fees paid.</p>
+                            <p>You are required to make <b>PROVISIONAL PAYMENT</b> of all fees before or on Monday 28th August {{date('Y')}}. </p>
  
                             <p>Please, accept my congratulations on your admission to the University.</p>
                           
@@ -277,37 +276,36 @@ overflow:hidden;
                            
                             <div style="margin-left: 0px;text-align: justify">
                                
-                                <centerd><b><p class="">OFFER OF ADMISSION  - {{ strtoupper(@$data->admitedProgram->department->schools->FACULTY)}}  -  ADMISSION N<u>O </u>: {{$data->APPLICATION_NUMBER}}</p></b></center>
+                                <centerd><b><p class="">OFFER OF ADMISSION(<b>CONDITIONAL</b>)- {{ strtoupper(@$data->admitedProgram->department->schools->FACULTY)}}  -  ADMISSION N<u>O </u>: {{$data->APPLICATION_NUMBER}}</p></b></center>
                                 <hr>
-                                <p>We write on behalf of the Academic Board to offer you admission to Takoradi  Technical University to pursue a programme of study leading to the award 
-                                    
+                                     
                                   <p>We write on behalf of the Academic Board to offer you admission to Takoradi  Technical University to pursue a programme of study leading to the award of
                                     
                                      @if(0===strpos($data->PROGRAMME_ADMITTED,'B'))
                                    @elseif(0===strpos($data->PROGRAMME_ADMITTED,'C') || 0===strpos($data->PROGRAMME_ADMITTED,'A'))
-                                   Certificate,
+                                  
                                       @elseif(0===strpos($data->PROGRAMME_ADMITTED,'H'))
-                                      Higher National Diploma,
+                                    
                                        @elseif(0===strpos($data->PROGRAMME_ADMITTED,'D'))
-                                       Diploma,
+                                      
                                       @else
                                       @endif<b> {{$sys->getProgram($data->PROGRAMME_ADMITTED)}}</b>. The duration of the programme is {{$sys->getProgramDuration($data->PROGRAMME_ADMITTED)}} Academic years. A change of Programme is <strong><b>NOT ALLOWED</b>.</strong></p>
                                 <p><i>
                                         <b><i> Note: Your admission is conditional. Per the new requirements you are supposed to have a minimum of D7 in six subjects with at least C6 in three relevant subjects in the area of specialization. You are therefore required to rewrite to make good the deficiencies within a period of one academic year. Your eligibility to continue with the HND programme would be based on the outcome of the SSCE/WASSCE result. You would be required to present your new results in writing to the DEPUTY REGISTRAR Academic affairs</i></b>
 
                                     </i></p>
-                                <p>1. Your admission is for the<b> {{$year}} </b>Academic year. If you fail to enroll or withdraw from the programme without prior approval of the University, you will forfeit the admission automatically.</p>
+                                <p>1. Your admission is for the<b> {{$year}} </b>Academic year. If you fail to enroll or withdraw from the programme without prior approval of the University, you will forfeits the admission automatically.</p>
                               
-                                <p>2. The<b> {{$year}} academic year</b> is scheduled to begin on <b> Monday 28th August   {{date('Y')}}</b>. You are however expected to report for medical examination and registration from <b>Monday 28th August {{date('Y')}} to Friday 8th September  {{date('Y')}}</b>.You are mandated to participate in orientation programme which will run from <b>Monday 4th September to Friday 8th September {{date('Y')}}</b>.</p>
+                                <p>2. The<b> {{$year}} academic year</b> is scheduled to begin on <b> Monday 28th August   {{date('Y')}}</b>. You are expected to report for medical examination and registration from <b>Monday 28th August {{date('Y')}} to Friday 8th September  {{date('Y')}}</b>.You are mandated to participate in orientation programme which will run from <b>Monday 4th September to Friday 8th September {{date('Y')}}</b>.</p>
                                 
-                                 <p>3. You are required to make full payment of <b>non-refundable fee </b>  of <b>GHS{{ $data->ADMISSION_FEES}}</b> at any branch of 
+                                 <p>3. You are required to make <b>PROVISIONAL PAYMENT</b> of <b>GHS{{ $data->ADMISSION_FEES}}</b> at any branch of 
                                      @if($data->admitedProgram->TYPE=="NON TERTIARY")
-                                     <b> UNIBANK into Account Number   1570105703613</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                     <b> UNIBANK into Account Number   1570105703613</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                    @elseif(strpos($sys->getProgram($data->PROGRAMME_ADMITTED),"Evening")!==false)  
-                                         <b> Ecobank into Account Number   0189104488868901</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                         <b> Ecobank into Account Number   0189104488868901</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                   
                                  @else
-                                        <b>{{strtoupper(@$data->admitedProgram->department->schools->banks->NAME)}} into Account Number {{@$data->admitedProgram->department->schools->banks->ACCOUNT_NUMBER}}</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                        <b>{{strtoupper(@$data->admitedProgram->department->schools->banks->NAME)}} into Account Number {{@$data->admitedProgram->department->schools->banks->ACCOUNT_NUMBER}}</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                    
                                       @endif
                             <p>4. You will be on probation for the full duration of your programme and may be dismissed at any time for unsatisfactory academic work or misconduct. You will be required to adhere to <b>ALL</b> the rules and regulations of the University as contained in the University Statutes, Examination Policy, Ethics Policy and Students' Handbook.</p>
@@ -318,7 +316,7 @@ overflow:hidden;
                            
                             <p>7. The University does not give financial assistance to students. It is therefore the responsibility of students to arrange for their own sponsorship and maintenance during the period of study.</p>
                             </div>
-                            <p>8. You are required to note that the University is a secular institution and is therefore not bound by observance of any religious or sectarian practices. As much as possible the University lectures and / or examination would be scheduled to take place within normal working days, but where it is  not feasible, lectures and examination would be held on other days.</p>
+                            <p>8. You are to note that the University is a secular institution and is therefore not bound by observance of any religious or sectarian practices. As much as possible the University lectures and / or examination would be scheduled to take place within normal working days, but where it is  not feasible, lectures and examination would be held on other days.</p>
                            <div id='page2'>
                             <p>9. As a policy of the University, all students shall be required to register under the National Health Insurance Scheme (NHIS) on their own to enable them access medical care whilst on campus.</p>
                            
@@ -331,8 +329,8 @@ overflow:hidden;
                            NOTE: Hall fees paid is not refundable.
                             
                             @endif
-                            <p>11. Any applicant who falsified results will be withdrawn from the university and will forfeit his/her fees paid.</p>
-                            <p>You are required to make the payment before or on Friday 30th June {{date('Y')}}. </p>
+                            <p>11. Any applicant who falsified results will be withdrawn from the university and will forfeits his/her fees paid.</p>
+                            <p>You are required to make <b>PROVISIONAL PAYMENT</b> of all fees before or on Monday 28th August {{date('Y')}}. </p>
  
                             <p>Please, accept my congratulations on your admission to the University.</p>
                           
@@ -367,36 +365,41 @@ overflow:hidden;
                            
                             <div style="margin-left: 0px;text-align: justify">
                                
-                                <centerd><b><p class="">OFFER OF ADMISSION  - {{ strtoupper(@$data->admitedProgram->department->schools->FACULTY)}}  -  ADMISSION N<u>O </u>: {{$data->APPLICATION_NUMBER}}</p></b></center>
+                                <centerd><b><p class="">OFFER OF ADMISSION  -
+                                            @if(@$data->admitedProgram->AFFILAITION=="")
+                                            {{ strtoupper(@$data->admitedProgram->department->schools->FACULTY)}}  -  
+                                            @else
+                                             {{ strtoupper(@$data->admitedProgram->PROGRAMME ."-".@$data->admitedProgram->AFFILAITION)}}  ADMISSION N<u>O </u>: {{$data->APPLICATION_NUMBER}}</p></b></center>
+                                @endif
                                 <hr>
                                 <p>We write on behalf of the Academic Board to offer you admission to Takoradi  Technical University to pursue a programme of study leading to the award of
                                     
                                     @if(0===strpos($data->PROGRAMME_ADMITTED,'B'))
                                    @elseif(0===strpos($data->PROGRAMME_ADMITTED,'C') || 0===strpos($data->PROGRAMME_ADMITTED,'A'))
-                                   Certificate,
+                                   
                                       @elseif(0===strpos($data->PROGRAMME_ADMITTED,'H'))
-                                      Higher National Diploma,
+                                    
                                        @elseif(0===strpos($data->PROGRAMME_ADMITTED,'D'))
-                                       Diploma,
+                                       
                                       @else
                                       @endif
                                     <b> {{$sys->getProgram($data->PROGRAMME_ADMITTED)}}</b>. The duration of the programme is {{$sys->getProgramDuration($data->PROGRAMME_ADMITTED)}} Academic years. A change of Programme is <strong><b>NOT ALLOWED</b>.</strong></p>
                                 
-                                <p>1. Your admission is for the<b> {{$year}} </b>Academic year. If you fail to enroll or withdraw from the programme without prior approval of the University, you will forfeit the admission automatically.</p>
+                                <p>1. Your admission is for the<b> {{$year}} </b>Academic year. If you fail to enroll or withdraw from the programme without prior approval of the University, you will forfeits the admission automatically.</p>
                               
-                                <p>2. The<b> {{$year}} academic year</b> is scheduled to begin on <b> Monday 28th August   {{date('Y')}}</b>. You are however expected to report for medical examination and registration from <b>Monday 28th August {{date('Y')}} to Friday 8th September  {{date('Y')}}</b>.You are mandated to participate in orientation programme which will run from <b>Monday 4th September to Friday 8th September {{date('Y')}}</b>.</p>
+                                <p>2. The<b> {{$year}} academic year</b> is scheduled to begin on <b> Monday 28th August   {{date('Y')}}</b>. You are expected to report for medical examination and registration from <b>Monday 28th August {{date('Y')}} to Friday 8th September  {{date('Y')}}</b>.You are mandated to participate in orientation programme which will run from <b>Monday 4th September to Friday 8th September {{date('Y')}}</b>.</p>
                                 
-                                 <p>3. You are required to make full payment of <b>non-refundable fee </b> 
-                                     of <b>GHS{{ $data->ADMISSION_FEES}}</b> at any branch of 
+                                 <p>3. You are required to make <b>PROVISIONAL PAYMENT</b> of  
+                                      <b>GHS{{ $data->ADMISSION_FEES}}</b> at any branch of 
                                      @if($data->admitedProgram->TYPE=="NON TERTIARY")
-                                     <b> UNIBANK into Account Number   1570105703613</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                     <b> UNIBANK into Account Number   1570105703613</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                         @elseif(0===strpos($data->PROGRAMME_ADMITTED,'B'))
-                                     <b>PRUDENTIAL BANK into Account Number 0271900010010 </b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                     <b>PRUDENTIAL BANK into Account Number 0271900010010 </b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                    @elseif(strpos($sys->getProgram($data->PROGRAMME_ADMITTED),"Evening")!==false)  
-                                         <b> Ecobank into Account Number   0189104488868901</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                         <b> Ecobank into Account Number   0189104488868901</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                  
                                  @else
-                                        <b>{{strtoupper($data->admitedProgram->department->schools->banks->NAME)}} into Account Number {{$data->admitedProgram->department->schools->banks->ACCOUNT_NUMBER}}</b>. If you do not indicate acceptance by paying the fees before <b> Friday 30th June,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make full payment of fees forfeit his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
+                                        <b>{{strtoupper($data->admitedProgram->department->schools->banks->NAME)}} into Account Number {{$data->admitedProgram->department->schools->banks->ACCOUNT_NUMBER}}</b>. If you do not indicate acceptance by paying the fees before <b> Monday 28th August,{{date('Y')}}</b> your place will be offered to another applicant on the waiting list. You are advised to make photocopy of the Pay-in-slip for keeps and present the original to the School Accounts Office on arrival.Indicate your admission number and programme of study on the Pay-in-slip. Any Applicant who fails to make <b>PROVISIONAL PAYMENT</b> of fees forfeits his/her admission. <b>Note: Fee payment is for an Academic Year</b>.</p>
                                    @endif
                             <p>4. You will be on probation for the full duration of your programme and may be dismissed at any time for unsatisfactory academic work or misconduct. You will be required to adhere to <b>ALL</b> the rules and regulations of the University as contained in the University Statutes, Examination Policy, Ethics Policy and Students' Handbook.</p>
                             
@@ -419,8 +422,8 @@ overflow:hidden;
                            NOTE: Hall fees paid is not refundable.
                            
                              @endif
-                            <p>11. Any applicant who falsified results will be withdrawn from the university and will forfeit his/her fees paid.</p>
-                            <p>You are required to make the payment before or on Friday 30th June {{date('Y')}}. </p>
+                            <p>11. Any applicant who falsified results will be withdrawn from the university and will forfeits his/her fees paid.</p>
+                            <p>You are required to make <b>PROVISIONAL PAYMENT</b> of all fees before or on Monday 28th August {{date('Y')}}. </p>
  
                             <p>Please, accept my congratulations on your admission to the University.</p>
                           

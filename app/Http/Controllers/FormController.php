@@ -33,8 +33,14 @@ class FormController extends Controller {
         $query = @Models\ApplicantModel::where("APPLICATION_NUMBER", $applicant)
                 ->where("ADMISSION_FEES",">",0)
                 ->where("ADMITTED", "1")->first();
+        if($query->PROGRAMME_ADMITTED=="MTECHT"||$query->PROGRAMME_ADMITTED=="MTECHP"||$query->PROGRAMME_ADMITTED=="MTECHG"){
+              return view("applicants.postgraLetter")->with("data", $query)->with('year',$year);
+    
+        }
+        else{
 
         return view("applicants.letter")->with("data", $query)->with('year', $year);
+        }
     }
 
     public function index() {
@@ -43,11 +49,16 @@ class FormController extends Controller {
         $query = @Models\ApplicantModel::where("APPLICATION_NUMBER", $applicant)
                 ->where("ADMISSION_FEES",">",0)
                 ->where("ADMITTED", "1")->first();
-        if($query->STATUS=="APPLICANT" || $query->ADMISSION_FEES==0){
+       if(empty( $query)){
+        
         return view("dashboard");
+        
+        }
+        else if($query->STATUS=="APPLICANT" || $query->ADMISSION_FEES==0){
+             return view("dashboard");
         }
         else{
-            return redirect("/form/letter");
+              return redirect("/form/letter");
         }
     }
 
@@ -72,10 +83,15 @@ class FormController extends Controller {
     }
 
     public function createGrades(SystemController $sys) {
+       // dd(@\Auth::user()->FORM_TYPE);
         if (@\Auth::user()->FINALIZED == 1) {
             return redirect("form/preview");
         } else {
-            if (@\Auth::user()->FORM_TYPE != "BTECH") {
+            
+            if (@\Auth::user()->FORM_TYPE == "BTECH"|| @\Auth::user()->FORM_TYPE == "MTECH") {
+                return redirect('/form/preview');
+            }
+          else {
                 if (@\Auth::user()->BIODATA_DONE == 1) {
                     $applicant = @\Auth::user()->FORM_NO;
                     $query = @Models\ExamResultsModel::where("APPLICATION_NUMBER", $applicant)->paginate(100);
@@ -94,8 +110,6 @@ class FormController extends Controller {
                 } else {
                     return redirect('/form/step2')->with('error1', 'Fill this portion of the form');
                 }
-            } else {
-                return redirect('/form/preview');
             }
         }
     }
@@ -495,6 +509,7 @@ class FormController extends Controller {
         }
         else{
         if ($request->isMethod("get")) {
+            
             $programme = $sys->getProgramList();
             $hall = $sys->getHalls();
             $query = Models\ApplicantModel::where("APPLICATION_NUMBER", @\Auth::user()->FORM_NO)->first();
@@ -528,7 +543,7 @@ class FormController extends Controller {
             $class = strtoupper($request->input('class'));
             $school = strtoupper($request->input('school'));
            
-                 if(@\Auth::user()->FORM_TYPE=="BTECH"){
+                 if(@\Auth::user()->FORM_TYPE=="BTECH" ||@\Auth::user()->FORM_TYPE=="MTECH" ){
                      $query = Models\ApplicantModel::where("APPLICATION_NUMBER", $applicantForm)
                     ->update(array(
                  
@@ -560,7 +575,7 @@ class FormController extends Controller {
             \DB::commit();
             if ($query) {
 
-                if (@\Auth::user()->FORM_TYPE == "BTECH") {
+                if (@\Auth::user()->FORM_TYPE == "BTECH" || @\Auth::user()->FORM_TYPE=="MTECH") {
                     return redirect("/form/academic/grades")->with("success1", " <span style='font-weight:bold;font-size:13px;'>  Form successfully Recieved!!</span> ");
                 } else {
                     return redirect("/form/academic/grades")->with("success1", " <span style='font-weight:bold;font-size:13px;'>  Form   successfully Recieved!!. </span> ")
@@ -701,7 +716,7 @@ class FormController extends Controller {
         $phone = $biodata->PHONE;
         $grades = @Models\ExamResultsModel::where("APPLICATION_NUMBER", $applicant)->get();
         if (@\Auth::user()->BIODATA_DONE == "1") {
-            if (@\Auth::user()->FORM_TYPE != "BTECH" && !$grades->isEmpty()) {
+            if ((@\Auth::user()->FORM_TYPE != "BTECH" ||  @\Auth::user()->FORM_TYPE=="MTECH")&& !$grades->isEmpty()) {
 
                 @Models\ApplicantModel::where("APPLICATION_NUMBER", $applicant)
                                 ->update(array("COMPLETED" => "1"));
@@ -816,7 +831,7 @@ class FormController extends Controller {
     
     public function generateAccounts() {
         ini_set('max_execution_time', 30000); //300 seconds = 5 minutes
-         $form=  Models\ExcelForm::where("SOLD_BY","UBA")->get();
+         $form=  Models\ExcelForm::get();
          foreach($form as $users=>$row){
              
              

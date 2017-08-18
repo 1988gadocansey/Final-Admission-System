@@ -104,7 +104,7 @@
                             @if(@\Auth::user()->COUNTRY=="GHANAIAN")
                             <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Qualification</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('qualification',array("WASSSCE"=>"WASSSCE","SSSCE"=>"SSSCE","TEU/TECHNICAL CERTIFICATES"=>"TEU/TECHNICAL CERTIFICATES" ,"NVTI"=>"NVTI","NAPTEX"=>"NAPTEX","OTHERS"=>"OTHERS") ,old('qualification',@$data->ENTRY_QUALIFICATION),array('placeholder'=>'SELECT FIRST QUALIFICATION'))  !!}
+                                {!!   Form::select('qualification',array("1ST DEGREE"=>"1ST DEGREE","WASSSCE"=>"WASSSCE","SSSCE"=>"SSSCE","TEU/TECHNICAL CERTIFICATES"=>"TEU/TECHNICAL CERTIFICATES" ,"NVTI"=>"NVTI","NAPTEX"=>"NAPTEX","OTHERS"=>"OTHERS") ,old('qualification',@$data->ENTRY_QUALIFICATION),array('placeholder'=>'SELECT FIRST QUALIFICATION'))  !!}
 
                                                             
 
@@ -126,7 +126,7 @@
                          <div class="form-group">
                          <label for="inputEmail3" class="col-xs-10 col-sm-2 col-md-2 col-lg-2 control-label">Qualification 2</label>
                             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
-                                {!!   Form::select('qualification2',array("WASSSCE"=>"WASSSCE","SSSCE"=>"SSSCE","TEU/TECHNICAL CERTIFICATES"=>"TEU/TECHNICAL CERTIFICATES" ,"NVTI"=>"NVTI","NAPTEX"=>"NAPTEX","OTHERS"=>"OTHERS") ,old('qualification2',@$data->ENTRY_QAULIFICATION2),array('placeholder'=>'SELECT SECOND QUALIFICATION ', "v-form-ctrl"=>"","v-select"=>"qualification2"))  !!}
+                                {!!   Form::select('qualification2',array("1ST DEGREE"=>"1ST DEGREE","WASSSCE"=>"WASSSCE","SSSCE"=>"SSSCE","TEU/TECHNICAL CERTIFICATES"=>"TEU/TECHNICAL CERTIFICATES" ,"NVTI"=>"NVTI","NAPTEX"=>"NAPTEX","OTHERS"=>"OTHERS") ,old('qualification2',@$data->ENTRY_QAULIFICATION2),array('placeholder'=>'SELECT SECOND QUALIFICATION ', "v-form-ctrl"=>"","v-select"=>"qualification2"))  !!}
 
                               
                             </div>

@@ -140,7 +140,30 @@ class SystemController extends Controller {
 
         return @$programme[0]->DURATION;
     }
-
+  public function hallData($hall) {
+          $info = \DB::table('tpoly_hall')->where("HALL_NAME",$hall)->first();
+             
+         return $info;
+              
+    }
+    public function hallAccount($hall) {
+          $info = \DB::table('tpoly_hall')->where("HALL_NAME",$hall)->first();
+             
+         return $info->ACCOUNTNUMBER;
+              
+    }
+    public function hallFees($hall) {
+          $info = \DB::table('tpoly_hall')->where("HALL_NAME",$hall)->first();
+             
+         return $info->AMOUNT;
+              
+    }
+    public function hallRoomConsumed($hall) {
+          $info = \DB::table('tpoly_applicants')->where("HALL_ADMITTED",$hall)->count();
+             
+         return $info;
+              
+    }
     // this is purposely for select box 
     public function getProgramList() {
         $formType = @\Auth::user()->FORM_TYPE;
@@ -150,7 +173,7 @@ class SystemController extends Controller {
             return $program;
         }
         elseif($formType == "DIPLOMA"){
-             $program = \DB::table('tpoly_programme')->where("TYPE", "LIKE", "DIPLOMA%")->where("RUNNING","1")->orderby("PROGRAMME")
+             $program = \DB::table('tpoly_programme')->where("TYPE", "LIKE", "%NON TERTIARY%")->where("RUNNING","1")->orderby("PROGRAMME")
                     ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
         }
@@ -160,8 +183,13 @@ class SystemController extends Controller {
                     ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
         }
+        elseif($formType == "MTECH"){
+            $program = \DB::table('tpoly_programme')->where("TYPE",   "MTECH")->where("RUNNING","1")->orderby("PROGRAMME")
+                    ->lists('PROGRAMME', 'PROGRAMMECODE');
+            return $program;
+        }
          elseif($formType == "CERTIFICATES"){
-            $program = \DB::table('tpoly_programme')->where("TYPE",    "CERTIFICATE")->where("RUNNING","1")->orderby("PROGRAMME")
+             $program = \DB::table('tpoly_programme')->where("TYPE", "LIKE", "%NON TERTIARY%")->where("RUNNING","1")->orderby("PROGRAMME")
                     ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
 
@@ -257,22 +285,20 @@ class SystemController extends Controller {
             $phone = str_replace(' ', '', $phone);
                  $phone = str_replace('-', '', $phone);
                  if (!empty($message) && !empty($phone)) {
-           $key = "bcb86ecbc1a058663a07"; //your unique API key;
-          $message=urlencode($message); //encode url;
-        $sender_id="TTU";
+                     $sender_id="TTU";
 
-        $url = "http://sms.gadeksystems.com/smsapi?key=$key&to=$phone&msg=$message&sender_id=$sender_id";
-        //print_r($url);
-        $result = file_get_contents($url); //call url and store result;
-
-                   if ($result = 1000) {
+        $url = "https://apps.mnotify.net/smsapi?key=$key&to=$phone&msg=$message&sender_id=$sender_id";
+     
+          // $url = "http://sms.gadeksystems.com/smsapi?key=$key&to=$phone&msg=$message&sender_id=$sender_id";
+        $ch = \curl_init();
+        \curl_setopt($ch, CURLOPT_URL, $url);
+        \curl_setopt($ch, CURLOPT_HEADER, 0);
+        \curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $result = \curl_exec($ch);
+        \curl_close($ch);
 
                    $result="Message was successfully sent"; 
                    
-                    }else{ 
-                    $result="Message failed to send. Error: " .  $result; 
-                     
-                    } 
                     $array=  $this->getSemYear();
         $sem=$array[0]->SEMESTER;
                $year=$array[0]->YEAR;
